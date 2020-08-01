@@ -1,0 +1,13 @@
+data/
+
+frontend/node_modules/
+
+backend/node_modules/
+
+backend/combined.log
+
+backend/error.log
+
+backend/.env
+
+backend/temp

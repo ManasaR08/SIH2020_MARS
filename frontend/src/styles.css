@@ -1,0 +1,21 @@
+/* You can add global styles to this file, and also import other style files */
+
+body {
+    --custom-red: #f76c6c;
+    --custom-yellow: #f8e9a1;
+    --custom-blue: #a8d0e6;
+    --custom-blue-selected:#77badf; 
+    --custom-deep-blue: #374785;
+    --custom-dark-blue: #24305e;
+    margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+html, body { height: 100%; }
+* { box-sizing: border-box; }
+.row { display: flex; flex-direction: row; -ms-flex-direction: row; }
+.column{ display: flex; flex-direction: column; -ms-flex-direction: column; }
+.align-center-end{ align-items: center; justify-content: space-between; }
+a{ text-decoration: none; outline: none; }
+a:active{ text-decoration: none; outline: none; color: inherit; }
+.align-center { align-items: center; }
+.align-end-between{ align-items: flex-end; justify-content: space-between; }
