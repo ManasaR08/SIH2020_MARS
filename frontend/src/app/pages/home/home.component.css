@@ -1,0 +1,72 @@
+.brand{
+    display: flex; align-items: center; justify-content: center;
+    flex-direction: row; -ms-flex-direction: row;
+    font-size: 1.3rem; font-weight: bold;
+}
+.brand img{
+    width: 80px;
+}
+.navbar-home {
+    padding: 0 30px;
+    z-index: 1;
+    position: absolute; top: 0; left: 0; width: 100%; height: 60px;
+}
+.actions button{
+    border-radius: 10px;
+    margin: 0 5px;
+}
+
+.landing{
+    height: 100%;
+    align-items: center;
+    position: relative;
+}
+.split-container{
+    width: 50%;
+    z-index: 1;
+    display: flex;
+}
+.left{
+    align-items: center;
+    justify-content: center;
+}
+.left img{
+    width: 100%;
+}
+.right{
+    padding: 50px;
+    align-items: flex-start;
+    justify-content: center;
+}
+h1{
+    font-size: 3rem; font-weight: bold;
+    line-height: 3rem;
+}
+h3{
+    font-size: 1.5rem; font-weight: bold;
+}
+.landing { width: 100%; }
+
+@media only screen and (max-width: 850px) {
+    h1{ font-size: 2rem; } 
+}
+@media only screen and (max-width: 636px) {
+    h1{ font-size: 2.5rem; line-height: 2.5rem; } 
+    .split-container{ width: 100% !important; }
+    .left { width: 0% !important; display: none !important; }
+}
+
+.place1{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 0;
+}
+.place2{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 0;
+}

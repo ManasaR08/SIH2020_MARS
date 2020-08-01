@@ -1,1 +1,39 @@
-<p>home works!</p>
+<div class="navbar-home row align-center-end">
+    <div class="brand">
+        <img class="logo" src="assets/images/logo.png"> araDemic
+    </div>
+    <div class="row actions">
+        <a [routerLink]="['/auth/login']">
+            <button mat-button color="primary">Login</button>
+        </a>
+        <a [routerLink]="['/auth/signup']">
+            <button mat-raised-button color="primary">
+                Register
+            </button>
+        </a>
+    </div>
+</div>
+<div class="row landing">
+    <div class="split-container left">
+        <img alt="Landing image" src="assets/images/landing.svg">
+    </div>
+    <div class="column split-container right">
+        <h1>Your gateway to learning at your pace</h1>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quo porro quasi ullam deserunt illum, magni, in, qui perferendis animi unde harum optio dolorem ad assumenda. Veniam deserunt in reprehenderit odit.</p>
+        <h3>Are you a</h3>
+        <div class="row actions">
+            <a [routerLink]="['/auth/signup']" [queryParams]="{access:'student'}">
+                <button mat-raised-button color="primary">
+                    Student?
+                </button>
+            </a>
+            <a [routerLink]="['/auth/signup']" [queryParams]="{access:'teacher'}">
+                <button mat-raised-button color="accent">
+                    Teacher?
+                </button>
+            </a>
+        </div>
+    </div>
+    <svg class="place2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#a2d9ff" fill-opacity="1" d="M0,256L1440,128L1440,0L0,0Z"></path></svg>
+    <svg class="place1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#a2d9ff" fill-opacity="1" d="M0,256L1440,128L1440,320L0,320Z"></path></svg>
+</div>
