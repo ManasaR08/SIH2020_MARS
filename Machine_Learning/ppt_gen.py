@@ -58,10 +58,10 @@ def extract_text_from_pdf(filename):
             run.text = line
             font = run.font
             font.name = 'Calibri'
-            font.size = Pt(11)
+            font.size = Pt(16)
             #p.level = 1
     
     prs.save('summary.pptx')
 
 
-extract_text_from_pdf('history.pdf')
+extract_text_from_pdf('dyslexia.pdf')
