@@ -32,6 +32,8 @@ async def index():
 
 @app.post('/pdfpptgen')
 async def pdfpptgen(upload: Upload):
-    directory, name = pdf_to_ppt(upload.filepath)
+    directory, name, qa_pair = pdf_to_ppt(upload.filepath)
     # response = RedirectResponse(url='/static/'+ name)
-    return {"filepath": 'http://localhost:8000/'+name}
+    return {"filepath": 'http://localhost:8000/'+name,
+            "qa_pair": qa_pair}
+

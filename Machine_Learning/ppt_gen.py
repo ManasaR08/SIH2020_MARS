@@ -4,6 +4,7 @@ from pptx import Presentation
 from pptx.util import Inches, Pt
 import os
 import requests
+from question_answer import qa_gen
 
 
 
@@ -69,7 +70,7 @@ def pdf_to_ppt(filename):
     prs.save(summary_name)
     directory = os.path.dirname(__file__)
 
-    return directory, summary_name
+    qa_pair = qa_gen(filename)
 
+    return directory, summary_name, qa_pair
 
-#pdf_to_ppt('dyslexia.pdf')
