@@ -2,6 +2,7 @@ import PyPDF2
 import requests
 from pptx import Presentation
 from pptx.util import Inches, Pt
+import os
 
 
 def summerizer(title, content):
@@ -61,9 +62,11 @@ def pdf_to_ppt(filename):
             font.size = Pt(16)
             #p.level = 1
     
-    prs.save('summary.pptx')
-    filepath = os.path.join(os.path.dirname(__file__), 'summary.pptx')
-    return(filepath)
+    summary_name = 'summary.pptx'
+    prs.save(summary_name)
+    directory = os.path.dirname(__file__)
+
+    return directory, summary_name
 
 
-pdf_to_ppt('dyslexia.pdf')
+#pdf_to_ppt('dyslexia.pdf')
