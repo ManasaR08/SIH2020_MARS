@@ -161,4 +161,12 @@ export class DashboardViewComponent implements OnInit {
     });
     this.router.navigate(['/dashboard/user/student']);
   }
+
+  viewQuestions(id) {
+    this._store.dispatch({
+      type: 'SET_CURRENT_QUESTION',
+      payload: id
+    });
+    this.router.navigate(['/dashboard/questions']);
+  }
 }

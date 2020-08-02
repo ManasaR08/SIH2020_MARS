@@ -9,6 +9,7 @@ import { DashboardViewComponent } from './pages/dashboard-view/dashboard-view.co
 import { DashboardUserComponent } from './pages/dashboard-user/dashboard-user.component';
 import { DashboardResultComponent } from './pages/dashboard-result/dashboard-result.component';
 import {AuthGuardService} from './_guards/auth.guard';
+import { QuestionsComponent } from './pages/questions/questions.component';
 const routes: Routes = [
   {
     path: '',
@@ -49,6 +50,10 @@ const routes: Routes = [
       {
         path: 'add',
         component: DashboardAddComponent
+      },
+      {
+        path: 'questions',
+        component: QuestionsComponent
       }
     ]
   }

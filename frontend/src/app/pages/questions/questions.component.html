@@ -1,0 +1,113 @@
+<div class="row main">
+    <div class="column column-1">
+        <div class="header-text">Questions generate</div>
+        <mat-tab-group>
+            <mat-tab label="Short Answer">
+                <div *ngIf="shortAnswer.length == 0">No questions to show</div>
+                <mat-accordion>
+                    <mat-expansion-panel *ngFor="let item of shortAnswer; let index=index" (opened)="panelOpenState = true"
+                                         (closed)="panelOpenState = false">
+                      <mat-expansion-panel-header>
+                        <mat-panel-header>
+                            <div  class="padding">
+                                <span class="bold">Q{{index}}. </span>
+                                {{item.Question}}
+                            </div>
+                        </mat-panel-header>
+                      </mat-expansion-panel-header>
+                      <div class="padding">
+                        <p>{{item.Answer}}</p>
+                      </div>
+                    </mat-expansion-panel>
+                </mat-accordion>
+            </mat-tab>
+            <mat-tab label="Fill in the blanks">
+                <div *ngIf="recall.length == 0">No questions to show</div>
+                <mat-accordion>
+                    <mat-expansion-panel *ngFor="let item of recall; let index=index" (opened)="panelOpenState = true"
+                                         (closed)="panelOpenState = false">
+                      <mat-expansion-panel-header>
+                        <mat-panel-header>
+                            <div  class="padding">
+                                <span class="bold">Q{{index}}. </span>
+                                {{item.Question}}
+                            </div>
+                        </mat-panel-header>
+                      </mat-expansion-panel-header>
+                      <div class="padding">
+                        <p>
+                            {{item.Answer}}
+                            <br>
+                            {{item.originalSentence}}
+                        </p>
+                      </div>
+                    </mat-expansion-panel>
+                </mat-accordion>
+            </mat-tab>
+            <mat-tab label="Multiple Choice">
+                <div *ngIf="mcq.length == 0">No questions to show</div>
+                <mat-accordion>
+                    <mat-expansion-panel *ngFor="let item of mcq; let index=index" (opened)="panelOpenState = true"
+                                         (closed)="panelOpenState = false">
+                      <mat-expansion-panel-header collapsedHeight="*" expandedHeight="*">
+                        <mat-panel-header>
+                            <div  class="padding">
+                                <span class="bold">Q{{index}}. </span>
+                                {{item.Question}}
+                                <br>
+                                <ng-container *ngFor="let option of item.Options;let index=index">
+                                    [{{index}}] {{option}} <br>                                    
+                                </ng-container>
+                            </div>
+                        </mat-panel-header>
+                      </mat-expansion-panel-header>
+                      <div class="padding">
+                        <p>
+                            {{item.Answer}}
+                            <br>
+                            {{item.originalSentence}}
+                        </p>
+                      </div>
+                    </mat-expansion-panel>
+                </mat-accordion>
+            </mat-tab>
+            <mat-tab label="True/False">
+                <mat-accordion>
+                    <div *ngIf="trueFalse.length == 0">No questions to show</div>
+                    <mat-expansion-panel *ngFor="let item of trueFalse; let index=index" (opened)="panelOpenState = true"
+                                         (closed)="panelOpenState = false">
+                      <mat-expansion-panel-header collapsedHeight="*" expandedHeight="*">
+                        <mat-panel-header>
+                            <div  class="padding">
+                                <span class="bold">Q{{index}}. </span>
+                                {{item.question}}
+                                <br>
+                                True<br>
+                                False<br>
+                            </div>
+                        </mat-panel-header>
+                      </mat-expansion-panel-header>
+                      <div class="padding">
+                        {{item.answer}}
+                        <br>
+                        {{item.correctSent}}
+                      </div>
+                    </mat-expansion-panel>
+                </mat-accordion>
+            </mat-tab>
+        </mat-tab-group>
+    </div>
+    <div class="column column-2">
+        <div class="header-text">More uploads</div>
+        <div *ngIf="uploads.length == 0">No documents uploaded</div>
+        <div class="card-container" *ngFor="let upload of uploads">
+            <mat-card>
+                <div class="row align-center-between" (click)="fetchQuestions(upload.questions)">
+                    <div class="subtitle">
+                        {{upload.name}}
+                    </div>
+                </div>
+            </mat-card>
+        </div>
+    </div>
+</div>

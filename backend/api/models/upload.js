@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const upload = new mongoose.Schema({
     pdf: {type: String},
     ppt: {type: String},
-    questionBank: {type: String},
+    questions: {type: String},
     createdAt: {type: String},
     name: {type: String}
 })

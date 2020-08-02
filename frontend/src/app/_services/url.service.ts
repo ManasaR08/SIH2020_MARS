@@ -19,6 +19,7 @@ export class UrlService {
   viewTeacherUrl: string;
   addSuggestionUrl: string;
   getResultUrl: string;
+  questionUrl: string;
 
   constructor() {
     this.baseUrl = 'http://localhost:3000/api';
@@ -38,5 +39,7 @@ export class UrlService {
     this.teacherUploadsUrl = `${this.baseUrl}/teacher/upload`;
     this.addDocumentUrl = `${this.baseUrl}/teacher/upload/add`;
     this.addSuggestionUrl = `${this.baseUrl}/teacher/students/suggestion`;
+
+    this.questionUrl = `${this.baseUrl}/user/questions`
   }
 }
