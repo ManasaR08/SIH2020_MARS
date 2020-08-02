@@ -1,7 +1,29 @@
-
+import nltk
+nltk.download('stopwords')
 from nltk.corpus import stopwords 
 from nltk.tokenize import word_tokenize 
 
+
+
+import json
+
+with open('response.json') as f:
+    data = json.load(f)
+
+questions = []
+answers = []
+
+print(data.keys())
+
+for value in data.values():
+    for qa in value:
+
+        if "Question" in qa.keys():
+            questions.append(qa["Question"])
+            answers.append(qa["Answer"])
+        elif "question" in qa.keys():
+            questions.append(qa["question"])
+            answers.append(qa["answer"])
 
 def cosine_similarity(text1,text2):
     text1_list = word_tokenize(text1)
@@ -27,5 +49,10 @@ def cosine_similarity(text1,text2):
     cos_sim = c/float((sum(l1)*sum(l2))**0.5)
     return cos_sim
 
+student_question = "This phenomenon, is probably best 59. Since then the _______, causes, and nature of the disability have been discussed by scores of investigators."
+
+for question in questions:
+    similarity = cosine_similarity(student_question, question)
+    print(similarity)
 
 

@@ -8,7 +8,7 @@ import json
 headers = {
     'accept': '*/*',
     'Content-Type': 'text/plain',
-    'Authorization': 'Bearer 39505901-fbac-3dfc-9c5c-5bc25b5b60ca',
+    'Authorization': 'Bearer 65feb00a-2a2c-3c57-a8b9-ef1b62d5f8ce',
 }
 
 params = (
@@ -56,3 +56,4 @@ def qa_gen(filename):
     output.update({"whQuestions" : response["whQuestions"]["customQuestions"]})
 
     return output
+
