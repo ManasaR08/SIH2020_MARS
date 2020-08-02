@@ -23,7 +23,7 @@ def summerizer(title, content):
 
 
 
-def extract_text_from_pdf(filename):
+def pdf_to_ppt(filename):
 
     prs = Presentation()
     bullet_slide_layout = prs.slide_layouts[1]
@@ -62,6 +62,8 @@ def extract_text_from_pdf(filename):
             #p.level = 1
     
     prs.save('summary.pptx')
+    filepath = os.path.join(os.path.dirname(__file__), 'summary.pptx')
+    return(filepath)
 
 
-extract_text_from_pdf('dyslexia.pdf')
+pdf_to_ppt('dyslexia.pdf')
