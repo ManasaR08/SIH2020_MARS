@@ -15,3 +15,5 @@ backend/temp
 data-prod/
 
 Machine_Learning/__pycache__
+
+Machine_Learning/static/

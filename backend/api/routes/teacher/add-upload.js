@@ -5,7 +5,7 @@ const {ServerError, Success, AuthError} = require('../../responses');
 module.exports = async (req, res) => {
     try {
         const {userId, name, pdf} = req.body;
-        const response = await getPPT(pdf);
+        const response = await getPPT(name, pdf);
         console.log(response);
         if (response.success == false) return res.json({...Success, success: false, message: 'Error generating ppt'});
 
