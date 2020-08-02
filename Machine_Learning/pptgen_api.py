@@ -1,19 +1,20 @@
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
+from starlette.responses import RedirectResponse
 from ppt_gen import pdf_to_ppt
 
 app = FastAPI()
 
 @app.get('/')
-def index():
+async def index():
     return "Welcome to SIH"
     
 
-app.mount("/static", StaticFiles(directory="D:\SIH2020_MARS\Machine_Learning\ppt_gen"), name="ppt_gen")
+
 
 @app.get('/pdfpptgen/{filepath}')
-def pdfpptgen(filepath):
-    return pdf_to_ppt(filepath)
-
-
-@app.get('')
+async def pdfpptgen(filepath):
+    directory, name = pdf_to_ppt(filepath)
+    app.mount("/static", StaticFiles(directory=directory), name=name)
+    response = RedirectResponse(url='/static/'+ name)
+    return response
