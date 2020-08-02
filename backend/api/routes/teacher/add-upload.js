@@ -5,7 +5,8 @@ module.exports = async (req, res) => {
     try {
         const {userId, name, pdf} = req.body;
         let ppt = '';
-        const added = await addUpload(userId, ppt, pdf, name);
+        let questionBank = ''
+        const added = await addUpload(userId, ppt, pdf, name, questionBank);
 
         if (added.success == false) return res.json({...AuthError, success: false, message: 'Error adding the pdf as ppt'});
         return res.json({...Success, pdf, ppt, id: added.id});

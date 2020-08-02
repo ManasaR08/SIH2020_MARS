@@ -2,11 +2,12 @@ const Teacher = require('../models/teacher');
 const Upload = require('../models/upload');
 
 module.exports = {
-    addUpload: async (teacherId, ppt, pdf, name) => {
+    addUpload: async (teacherId, ppt, pdf, name, questionBank) => {
         try {
             let upload = new Upload({
                 ppt,
                 pdf,
+                questionBank,
                 name
             });
             upload = await upload.save();
