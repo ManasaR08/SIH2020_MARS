@@ -5,4 +5,4 @@ fastapi
 uvicorn
 google_images_download
 gTTS
-
+pydantic
