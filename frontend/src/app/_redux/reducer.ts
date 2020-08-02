@@ -38,7 +38,7 @@ export const UserStateReducer = (state = INITIAL_USER_STATE, action) => {
 export interface DataState {
     suggestions: any[];
     searches: any[];
-    currentResult: {text: string, result: any[]}
+    currentResult: any;
     teachers: any[];
     suggestedTeachers: any[];
     students: any[];
@@ -48,7 +48,7 @@ export interface DataState {
 export const INITIAL_DATA_STATE: DataState = {
     suggestions: [],
     searches: [],
-    currentResult: {text: null, result: []},
+    currentResult: null,
     teachers: [],
     suggestedTeachers: [],
     students: [],
@@ -70,11 +70,16 @@ export const UserDataReducer = (state = INITIAL_DATA_STATE, action) => {
                     {
                         _id: action.payload.id,
                         search: action.payload.text,
-                        result: action.payload.result
+                        result: action.payload.result,
+                        type: action.payload.type
                     }],
-                currentResult: {text: action.payload.text, result: action.payload.result}                
+                currentResult: action.payload.id                
             }          
-            
+        case 'SET_SEARCH':
+            return {
+                ...state,
+                currentResult: action.payload                
+            }
         case 'SET_SEARCHES':
             return {
                 ...state, searches: action.payload, 
@@ -83,7 +88,7 @@ export const UserDataReducer = (state = INITIAL_DATA_STATE, action) => {
         case 'ADD_TEACHER':
             return {
                 ...state, teachers: [...state.teachers, {_id: action.payload.id, name: action.payload.name, uploads: action.payload.uploads}],
-                suggestions: state.suggestions.filter(teacher => teacher._id !== action.payload.id)
+                suggestedTeachers: state.suggestedTeachers.filter(teacher => teacher._id !== action.payload.id)
             }
         case 'SET_TEACHERS':
             return {

@@ -8,6 +8,7 @@ import { MatBottomSheet, MatBottomSheetConfig } from '@angular/material/bottom-s
 import { DisplaySizeService } from '../../_services/display-size.service';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { UploadDocumentComponent } from 'src/app/components/upload-document/upload-document.component';
+import { LoadingComponent } from 'src/app/components/loading/loading.component';
 
 
 @Component({
@@ -109,7 +110,20 @@ export class DashboardViewComponent implements OnInit {
       return;
     }
   }
+  visualiseSearch(text) {
+    this.student.searchVisualization(text);
+    let dialog = this.dialog.open(LoadingComponent, { disableClose: true })
+    this.student.resultAvailable.subscribe((val) => {
+      dialog.close();
+      if (val == true) {
+        this.router.navigate(['/dashboard/result']);
+      }
+    })
+  }
   viewSearchResult(id) {
+    console.log(id);
+    this.student.viewResult(id);
+    this.router.navigate(['/dashboard/result']);
   }
   setNavOptions() {
     if (this.type == 'teachers') {
@@ -128,7 +142,7 @@ export class DashboardViewComponent implements OnInit {
     }
   }
 
-  joinTeacher(id, name, uploads) {
+  joinTeacher(name, id, uploads) {
     this.student.addTeacher(name, id, uploads);
   }
 

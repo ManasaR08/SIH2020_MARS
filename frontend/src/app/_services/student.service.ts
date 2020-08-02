@@ -68,7 +68,7 @@ export class StudentService {
       if (val.success == true) {
         this._store.dispatch({
           type: 'ADD_SEARCH',
-          payload: {text, id: val.id, result: val.result},
+          payload: {text, id: val.id, result: val.result, type:'answer'},
         });
         this.resultAvailable.next(true);
       } else {
@@ -76,14 +76,19 @@ export class StudentService {
       }
     });
   }
-
+  viewResult(id) {
+    this._store.dispatch({
+      type: 'SET_SEARCH',
+      payload: id,
+    });    
+  }
   searchVisualization(text) {    
     this.resultAvailable.next(false);
     this.backend.addSearch(text, 'visualise').subscribe((val:any) => {
       if (val.success == true) {
         this._store.dispatch({
           type: 'ADD_SEARCH',
-          payload: {text, id: val.id, result: val.result},
+          payload: {text, id: val.id, result: val.result, type:'visualise'},
         });
         this.resultAvailable.next(true);
       } else {

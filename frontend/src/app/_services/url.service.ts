@@ -18,6 +18,7 @@ export class UrlService {
   teacherUploadsUrl: string;
   viewTeacherUrl: string;
   addSuggestionUrl: string;
+  getResultUrl: string;
 
   constructor() {
     this.baseUrl = 'http://localhost:3000/api';
@@ -31,7 +32,7 @@ export class UrlService {
     this.studentSearchUrl = `${this.baseUrl}/student/search`;
     this.studentAccessTeacherUrl = `${this.baseUrl}/student/teachers`;
     this.viewTeacherUrl = `${this.baseUrl}/student/teachers/view`;
-
+    this.getResultUrl = `${this.baseUrl}/student/result`;
     
     this.studentForTeacherUrl = `${this.baseUrl}/teacher/students`;
     this.teacherUploadsUrl = `${this.baseUrl}/teacher/upload`;

@@ -66,5 +66,15 @@ module.exports = {
         } catch (err) {
             return false;
         }
+    },
+
+    getResult: async (searchID) => {
+        try {
+            const result = await Search.findOne({_id: searchID}).lean();
+            if (result == null) return {success: false}
+            return {success: true, ...result};
+        } catch (err) {
+            return {success: false}
+        }
     }
 }

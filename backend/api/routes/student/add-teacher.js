@@ -2,10 +2,11 @@ const Search = require('../../controllers/teacherAuth').getTeacher;
 const AddToTeacher = require('../../controllers/teacherOptions').addStudent;
 const AddToStudent = require('../../controllers/studentOptions').addTeacher;
 const {ServerError, Success} = require('../../responses');
-
+0
 module.exports = async (req, res) => {
     try {
         const {userId, teacherId} = req.body;
+        console.log(teacherId);
         const exists = await Search(teacherId);
         if (exists.success == false || exists.user == null) return res.json({...Success, success: false, message: 'Teacher doesnot exist'});
 

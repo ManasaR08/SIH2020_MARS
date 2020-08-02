@@ -45,6 +45,9 @@ export class BackendService extends UrlService {
   viewTeacher(id) {
     return this.http.post(this.viewTeacherUrl, {teacherId: id});
   }
+  getResult(searchId) {
+    return this.http.post(this.getResultUrl, {searchId});
+  }
 
   getStudents() {
     return this.http.get(this.studentForTeacherUrl);

@@ -6,7 +6,9 @@ WORKDIR /var/www/app
 
 COPY package.json /var/www/app
 
-RUN npm install
+RUN npm i @angular/cdk -g
+
+RUN npm i
 
 COPY . /var/www/app
 

@@ -26,6 +26,7 @@ router.post('/student/teachers', Student.AddTeacher);
 router.post('/student/teachers/search', Student.SearchTeacher);
 router.post('/student/teachers/view', Student.ViewTeacher);
 router.post('/student/search', Student.AddSearch);
+router.post('/student/result', Student.GetResult);
 
 router.use('/teacher', TeacherAuth);
 router.get('/teacher/upload', Teacher.GetUploads);

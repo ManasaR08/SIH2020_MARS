@@ -12,7 +12,7 @@
                 </button>
                 <ng-container *ngIf="opened">Close</ng-container>
                 <ng-container *ngIf="!opened">Open</ng-container>
-                the menu, <span class="name-fg">{{ name.split(" ")[0] }}</span>
+                the menu, <span class="name-fg" *ngIf="name != null">{{ name.split(" ")[0] }}</span>
             </div>
             <div class="row align-center">
                 <div class="column">

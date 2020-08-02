@@ -5,6 +5,9 @@
 .header{
     font-size: 1.4rem; font-weight: bold;
 }
+.card-container{
+    margin: 10px 0px;
+}
 .column-1{
     width: 75%;
     padding: 10px 20px;
@@ -35,10 +38,13 @@
     font-weight: bold;
 }
 .option{
-    margin: 5px 0px;
+    margin: 0px 5px;
 }
 .margin{
     margin-top: 10px;
+}
+.header-text{
+    font-size: 1.2rem; font-weight: bold;
 }
 mat-icon{
     margin-right: 5px;
@@ -71,6 +77,11 @@ mat-icon{
     align-items: center; justify-content: center;
     background-color: rgba(44, 44, 44, 0.692);
     transition: all 0.25s ease-out;
+}
+.show{
+    display: flex !important;
+    opacity: 1 !important;
+
 }
 .line:hover .play-option{
     display: flex;

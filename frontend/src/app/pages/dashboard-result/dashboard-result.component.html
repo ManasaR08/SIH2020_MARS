@@ -9,79 +9,110 @@
         </button>
     </div>
 </div>
-<div class="row main">
-    <div class="row column-1">
-        <div class="image-enc">
-            <img class="image" src="assets/images/image.png">
-        </div>
-        <div class="controls">
-            <div class="sub-header">Text</div>
-            <div class="text">Lorem ipsum dolor sit, amet consectetur adipisicing elit</div>
-            <div class="sub-header">Controls</div>
-            <div class="option">
-                <button mat-flat-button color="primary">
-                    <mat-icon>play_arrow</mat-icon>Play sound
-                </button>
-            </div>
-            <div class="option">
-                <button mat-flat-button color="warn">
-                    <mat-icon>stop</mat-icon>
-                    Stop sound
-                </button>
-            </div>
-            <div class="margin option">
-                <button mat-flat-button color="primary">
-                    <mat-icon>skip_previous</mat-icon>Previous line</button>
-            </div>
-            <div class="option">
-                <button mat-flat-button color="primary">
-                    <mat-icon>skip_next</mat-icon>Next line</button>
-            </div>
-        </div>
-    </div>
-    <div class="column column-2">
-        <div class="header-text">Upcoming...</div>
-        <div class="line">
-            <div class="play-option">
-                <mat-icon>play_arrow</mat-icon>
-                Play video
-            </div>
-            <div class="row sub-play">
-                <div class="sub-image">
-                    <img src="assets/images/image.png" class="image">
+
+<ng-container *ngIf="type == 'answer'">
+    <div class="row main">
+        <div class="column column-1">
+            <div class="header-text">Question asked</div>
+            <div>{{search}}</div>            
+            <div class="margin header-text">Answer</div>
+            <div *ngIf="result.length != 0">{{result[0].text}}</div>
+            <div *ngIf="result.length == 0">No results were found</div>
+            <div class="row margin">
+                <div class="option">
+                    <button mat-flat-button color="primary">
+                        Voice over
+                    </button>
                 </div>
-                <div class="text">
-                    Lorem ipsum dolor sit, amet consectetur adipisicing elit. 
+                <div class="option" (click)="visualise(result[0].text)">
+                    <button mat-flat-button color="accent">
+                        Visualise
+                    </button>
                 </div>
             </div>
         </div>
-        <div class="line">
-            <div class="play-option">
-                <mat-icon>play_arrow</mat-icon>
-                Play video
-            </div>
-            <div class="row sub-play">
-                <div class="sub-image">
-                    <img src="assets/images/image.png" class="image">
-                </div>
-                <div class="text">
-                    Lorem ipsum dolor sit, amet consectetur adipisicing elit. 
-                </div>
-            </div>
-        </div>
-        <div class="line">
-            <div class="play-option">
-                <mat-icon>play_arrow</mat-icon>
-                Play video
-            </div>
-            <div class="row sub-play">
-                <div class="sub-image">
-                    <img src="assets/images/image.png" class="image">
-                </div>
-                <div class="text">
-                    Lorem ipsum dolor sit, amet consectetur adipisicing elit. 
-                </div>
+        <div class="column column-2">
+            <div class="header-text">Suggestions</div>
+            <div *ngIf="suggestions.length == 0">No suggestions to show</div>
+            <div class="card-container" *ngFor="let suggestion of suggestions">
+                <mat-card>
+                    <div class="column">
+                        <div>
+                            {{suggestion.search}}
+                        </div>                            
+                        <div class="row align-center-between">
+                            <div></div>
+                            <div>
+                                <button mat-button color="primary" (click)="visualise(suggestion.search)">
+                                    Visualise
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </mat-card>
             </div>
         </div>
     </div>
-</div>
+</ng-container>
+
+<ng-container *ngIf="type == 'visualise'">
+    <div class="header-text">Question asked</div>
+    <div>{{search}}</div>            
+    <div class="row main">
+        <div class="row column-1">
+            <div class="image-enc">
+                <img class="image" src="{{result[current].image}}">
+            </div>
+            <div class="controls">
+                <div class="sub-header">Text</div>
+                <div class="text">{{result[current].text}}</div>
+                <div class="sub-header">Controls</div>
+                <div class="row">
+                    <div class="option">
+                        <button mat-flat-button color="primary">
+                            <mat-icon>play_arrow</mat-icon>Play sound
+                        </button>
+                    </div>
+                    <div class="option">
+                        <button mat-flat-button color="warn">
+                            <mat-icon>stop</mat-icon>
+                            Stop sound
+                        </button>
+                    </div>
+                </div>
+                <div class="row margin">
+                    <div class="option">
+                        <button [disabled]="current == 0" (click)="prev()" mat-flat-button color="primary">
+                            <mat-icon>skip_previous</mat-icon>Previous line</button>
+                    </div>
+                    <div class="option">
+                        <button [disabled]="current == result.length - 1" (click)="next()" mat-flat-button color="primary">
+                            <mat-icon>skip_next</mat-icon>Next line</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="column column-2">
+            <div class="header-text">Upcoming...</div>
+            <div (click)="goTo(index)" class="line" *ngFor="let show of result; let index=index">
+                <div class="play-option"  [ngClass]="{'show': current == index}">
+                    <mat-icon>play_arrow</mat-icon>
+                    <ng-container *ngIf="current != index">
+                        Play video
+                    </ng-container>
+                    <ng-container *ngIf="current == index">
+                        Playing
+                    </ng-container>
+                </div>
+                <div class="row sub-play">
+                    <div class="sub-image">
+                        <img src="{{show.image}}" class="image">
+                    </div>
+                    <div class="text">
+                        {{show.text}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-container>

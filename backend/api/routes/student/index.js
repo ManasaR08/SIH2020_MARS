@@ -6,3 +6,4 @@ module.exports.ViewTeacher = require('./view-teacher');
 module.exports.PopularTeachers = require('./get-teachers-popular');
 module.exports.GetSearches = require('./get-searches');
 module.exports.GetSuggestions = require('./get-suggestions');
+module.exports.GetResult = require('./get-result');

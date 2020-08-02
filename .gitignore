@@ -11,3 +11,5 @@ backend/error.log
 backend/.env
 
 backend/temp
+
+data-prod/
