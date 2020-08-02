@@ -9,7 +9,7 @@ module.exports = async (name, file) => {
         });
         postResponse = postResponse.data;
         if (postResponse.filepath == undefined) return {success: false};
-        return {success: true, file: postResponse.filepath}
+        return {success: true, file: postResponse.filepath, questions: postResponse.questions}
     } catch (err) {
         return {success: false, error: err};
     }
