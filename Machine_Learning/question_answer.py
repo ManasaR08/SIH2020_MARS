@@ -3,6 +3,7 @@
 
 import requests
 import PyPDF2
+import json
 
 headers = {
     'accept': '*/*',
@@ -15,7 +16,7 @@ params = (
     ('recall', 'true'),
     ('mcq', 'true'),
     ('whQuestions', 'true'),
-    ('title', 'World War 2'),
+    ('title', 'Dyslexia'),
 )
 
 def qa_gen(filename):
@@ -31,22 +32,27 @@ def qa_gen(filename):
         #print(content)
         net_text = net_text + content
 
-        if len(net_text) > 2500:
+        if len(net_text) > 3000:
             break
 
-    return net_text
+    data = net_text
 
-data = qa_gen('temp.pdf')
-print(data)
-print("[INFO] Loading Model")
 
-response = requests.post('https://app.quillionz.com:8243/quillionzapifree/1.0.0/API/SubmitContent_GetQuestions', headers=headers, params=params, data=data.encode('utf-8'))
-response = response.json()
-print(response)
+    response = requests.post('https://app.quillionz.com:8243/quillionzapifree/1.0.0/API/SubmitContent_GetQuestions', headers=headers, params=params, data=data.encode('utf-8'))
+    response = response.json()
+    response = response['Data']
 
-#for qa_pair in response['Data']['shortAnswer']:
-#    print(qa_pair['Question'])
-#    print()
-#    print(qa_pair['Answer'])
-#    print()
-#    print()
+    output = {}
+    output.update({"shortAnswer" : response["shortAnswer"]})
+    output.update({"recall" : response["recall"]})
+    output.update({"mcq" : response["multipleChoiceQuestions"]["mcq"]})
+    trueFalse_dict = {}
+    trueFalse_list = []
+    for qs_list in response["multipleChoiceQuestions"]["trueFalse"]:
+        qs_list = qs_list["questionList"]
+        trueFalse_list = trueFalse_list + qs_list
+
+    output.update({"trueFalse" : trueFalse_list})
+    output.update({"whQuestions" : response["whQuestions"]["customQuestions"]})
+
+    return output
