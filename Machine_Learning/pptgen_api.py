@@ -8,9 +8,10 @@ from pydantic import BaseModel
 
 class Upload(BaseModel):
     filepath: str
+    name: str
 
 app = FastAPI()
-app.mount("/static", StaticFiles(directory=directory), name=name)
+app.mount("/static", StaticFiles(directory='static'), name='static')
 origins = [
     "http://localhost:4200",
 ]
@@ -29,10 +30,8 @@ async def index():
     return "Welcome to SIH"
     
 
-
-
 @app.post('/pdfpptgen')
 async def pdfpptgen(upload: Upload):
-    directory, name = pdf_to_ppt(upload["filepath"])
-    response = RedirectResponse(url='/static/'+ name)
-    return {"filepath": response}
+    directory, name = pdf_to_ppt(upload.filepath)
+    # response = RedirectResponse(url='/static/'+ name)
+    return {"filepath": 'http://localhost:8000/'+name}

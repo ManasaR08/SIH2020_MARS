@@ -3,6 +3,8 @@ import requests
 from pptx import Presentation
 from pptx.util import Inches, Pt
 import os
+import requests
+
 
 
 def summerizer(title, content):
@@ -29,8 +31,9 @@ def pdf_to_ppt(filename):
     prs = Presentation()
     bullet_slide_layout = prs.slide_layouts[1]
 
-
-    pdfFileObj = open(filename, 'rb')
+    r = requests.get(filename, allow_redirects=True)
+    open('temp.pdf', 'wb').write(r.content)
+    pdfFileObj = open('temp.pdf', 'rb')
     pdfReader = PyPDF2.PdfFileReader(pdfFileObj)
     print("There are {} pages in the document".format(pdfReader.numPages))
 
@@ -62,7 +65,7 @@ def pdf_to_ppt(filename):
             font.size = Pt(16)
             #p.level = 1
     
-    summary_name = 'summary.pptx'
+    summary_name = 'static/summary.pptx'
     prs.save(summary_name)
     directory = os.path.dirname(__file__)
 
