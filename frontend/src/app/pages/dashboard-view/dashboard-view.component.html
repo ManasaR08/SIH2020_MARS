@@ -141,7 +141,7 @@
                         <div style="margin-top: 10px;" class="row align-center-between">
                             <div></div>
                             <div class="row">
-                                <a href="{{upload.questionBank}}"><button style="margin-right: 10px;" mat-flat-button color="primary">Download questions</button></a>
+                                <button style="margin-right: 10px;" mat-flat-button color="primary" (click)="viewQuestions(upload.questions)">View questions</button>
                                 <a href="{{upload.ppt}}"><button mat-flat-button color="accent">Download PPT</button></a>
                                 <button (click)="deleteDocument(upload._id)" mat-icon-button color="error"><mat-icon>delete</mat-icon></button>
                             </div>

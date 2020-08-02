@@ -9,6 +9,9 @@ from pydantic import BaseModel
 class Upload(BaseModel):
     filepath: str
     name: str
+class Search(BaseModel):
+    text: str
+    types: str
 
 app = FastAPI()
 app.mount("/static", StaticFiles(directory='static'), name='static')
@@ -25,15 +28,21 @@ app.add_middleware(
 )
 
 
+
 @app.get('/')
 async def index():
     return "Welcome to SIH"
-    
 
+
+@app.post('/search')
+async def search(search: Search):
+    # search.types => answer or visualise
+    # text => TExt to get answer to or visualise
+    return {'result':[{'text': 'Lorem ipsum dolor sit, amet consectetu elit', 'image':'assets/images/image.png', 'voice': ''},{'text': 'Lorem ipsum dolor sit, amet consectetur adipisicing elit', 'image':'assets/images/image.png', 'voice': ''}]}
 @app.post('/pdfpptgen')
 async def pdfpptgen(upload: Upload):
     directory, name, qa_pair = pdf_to_ppt(upload.filepath)
     # response = RedirectResponse(url='/static/'+ name)
     return {"filepath": 'http://localhost:8000/'+name,
-            "qa_pair": qa_pair}
+            "questions": qa_pair}
 

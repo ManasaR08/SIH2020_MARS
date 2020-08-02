@@ -11,11 +11,16 @@ const Question = new mongoose.Schema({
         Answer: {type: String},
         originalSentence: {type: String}        
     }],
-    multipleChoiceQuestions: [{
-
+    mcq: [{
+        Question: {type: String},
+        Answer: {type: String},
+        originalSentence: {type: String},
+        Options: [{type: String}],
     }],
-    truFalse: [{
-
+    trueFalse: [{
+        question: {type: String},
+        answer: {type: String},
+        correctSent: {type: String},
     }]
 })
 

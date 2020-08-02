@@ -6,13 +6,12 @@ module.exports = async (req, res) => {
     try {
         const {userId, name, pdf} = req.body;
         const response = await getPPT(name, pdf);
-        console.log(response);
         if (response.success == false) return res.json({...Success, success: false, message: 'Error generating ppt'});
 
         const added = await addUpload(userId, response.file, pdf, name, response.questions);
 
         if (added.success == false) return res.json({...Success, success: false, message: 'Error adding the pdf as ppt'});
-        return res.json({...Success, pdf, questionBank: response.questions, ppt:response.file, id: added.id});
+        return res.json({...Success, pdf, questions: response.questions, ppt:response.file, id: added.id});
     } catch(err) {
         console.log(err)
         return res.json(ServerError)

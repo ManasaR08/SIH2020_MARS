@@ -19,6 +19,10 @@ export class QuestionsComponent implements OnInit {
   // result = [];
   // search: string;
   // current: number;
+  recall = [];
+  shortAnswer = [];
+  trueFalse = [];
+  mcq = [];
   questions = [ {
     shortAnswer: [{
       Question: 'nvub',
@@ -40,11 +44,10 @@ export class QuestionsComponent implements OnInit {
   constructor(private _store: Store<any>, private router: Router, private dialog: MatDialog, private student: StudentService, private backend: BackendService) {
     this._store.select('UserDataReducer').subscribe((val:any) => {
       console.log(val);
-      // this.searches = val.searches;
       this.uploads = val.uploads;
-      this.currentQuestion = val.currentResult;
-      if (this.currentQuestion != null) {
-        // this.fetchResult();
+      if (val.currentQuestion != null) {
+        this.currentQuestion = val.currentQuestion;
+        this.fetchResult();
       }
     })
   }
@@ -56,6 +59,10 @@ export class QuestionsComponent implements OnInit {
     this.backend.getQuestions(this.currentQuestion).subscribe((val:any) => {
       console.log(val);
       if (val.success == true) {
+        this.recall = val.recall;
+        this.shortAnswer = val.shortAnswer;
+        this.trueFalse = val.trueFalse;
+        this.mcq = val.mcq;
       }
     })    
   }

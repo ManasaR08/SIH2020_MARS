@@ -78,5 +78,11 @@ export class DashboardUserComponent implements OnInit {
       })
     }
   }  
-
+  viewQuestions(id) {
+    this._store.dispatch({
+      type: 'SET_CURRENT_QUESTION',
+      payload: id
+    });
+    this.router.navigate(['/dashboard/questions']);
+  }
 }

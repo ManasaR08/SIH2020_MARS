@@ -70,7 +70,7 @@ def pdf_to_ppt(filename):
     prs.save(summary_name)
     directory = os.path.dirname(__file__)
 
-    qa_pair = qa_gen(filename)
+    qa_pair = qa_gen('temp.pdf')
 
     return directory, summary_name, qa_pair
 

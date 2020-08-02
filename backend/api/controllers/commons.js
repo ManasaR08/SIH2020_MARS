@@ -7,6 +7,7 @@ module.exports = {
             if (questions == null) return {success: false};
             return {success: true, ...questions};
         } catch(err) {
+            console.log(err);
             return {success: false, error: err};
         }
     }
