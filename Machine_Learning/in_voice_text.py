@@ -61,7 +61,7 @@ def main(para):
     print(mp3path)
     #print(imagepath)
 
-main('This is a white panda. It ia eating a red apple')
+main('This is a white panda. It is eating a red apple')
 #print(a)
     
     

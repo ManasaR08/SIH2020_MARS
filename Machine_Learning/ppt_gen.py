@@ -6,6 +6,10 @@ import os
 import requests
 from question_answer import qa_gen
 
+from rake_nltk import Rake
+
+r = Rake() 
+
 
 
 def summerizer(title, content):
@@ -42,6 +46,9 @@ def pdf_to_ppt(filename):
         pageObj = pdfReader.getPage(page)
         content = pageObj.extractText()
 
+        r.extract_keywords_from_text(content)
+        r.get_ranked_phrases()
+
         page_summary = summerizer(filename[:-4], content)
 
         bullet_slide_layout = prs.slide_layouts[1]
@@ -51,10 +58,10 @@ def pdf_to_ppt(filename):
         title_shape = shapes.title
         body_shape = shapes.placeholders[1]
 
-        title_shape.text = filename[:-4]
+        title_shape.text = r.get_ranked_phrases()[0]
 
         tf = body_shape.text_frame
-        tf.text = 'Summery'
+        tf.text = 'Summary'
 
         for line in page_summary:
             p = tf.add_paragraph()
@@ -73,4 +80,3 @@ def pdf_to_ppt(filename):
     qa_pair = qa_gen('temp.pdf')
 
     return directory, summary_name, qa_pair
-
