@@ -1,0 +1,109 @@
+.column-1{
+    width: 75%;
+    padding: 10px 20px;
+}
+.column-2{
+    width: 25%;
+    padding: 10px 20px;
+}
+.header-text{
+    font-size: 1.2rem; font-weight: bold;
+}
+mat-card{
+    margin: 10px 0px;
+}
+.align-end-between{
+    align-items: flex-end; justify-content: space-between;
+}
+.center{
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;    
+}
+.options{
+    align-items: center;
+    justify-content: center;
+    overflow-x: auto;
+}
+.option{
+    width: 200px; 
+    border-radius: 10px;
+    display: flex;
+    padding: 20px 0px;
+    margin: 10px;
+    cursor: pointer;
+    background-color: var(--custom-blue);
+    flex-direction: column; -ms-flex-direction: column;
+    align-items: center; justify-content: center;
+    box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+    transition: all 0.5s ease-out;
+}
+.col-1{
+    align-items: center; justify-content: center;
+    width: 40%;
+}
+.col-2{
+    padding: 20px;
+    align-items: flex-start; justify-content: center;
+    width: 60%;
+}
+.margin{
+    margin: 10px 0px;
+}
+.selected {
+    background-color: var(--custom-blue-selected);
+    box-shadow: none;    
+}
+.option:hover{
+    background-color: var(--custom-blue-selected);
+    box-shadow: none;
+}
+.image{
+    width: 70%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 230px;
+}
+@media only screen and (max-width: 920px) {
+    .column-1{
+        width: 70%;
+    }
+    .column-2{
+        width: 30%;
+    }   
+}
+
+@media only screen and (max-width: 890px) {
+    .column-1{
+        width: 100%;
+        padding: 0px;
+    }
+    .column-2{
+        width: 100%;
+        padding: 0px;
+    }   
+    .main {
+        flex-direction: column; -ms-flex-direction: column;
+    }
+}
+
+.text-input{
+    width: 100%;
+}
+
+@media only screen and (max-width: 480px) {
+    .col-1{
+        width: 100%;
+    }
+    .col-1 .image{
+        display: none;
+    }
+    .selected-display{
+        flex-direction: column; -ms-flex-direction: column;
+    }
+    .col-2{
+        width: 100%;
+        padding: 20px 0px;
+    }
+}

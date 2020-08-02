@@ -1,1 +1,142 @@
-<p>dashboard-add works!</p>
+<div class="row main">
+    <div class="column column-1">
+        <mat-horizontal-stepper #stepper>
+            <mat-step>
+                <ng-template matStepLabel>Select your type of input</ng-template>
+                <div class="column center">
+                    <div class="header-text">Choose one of these</div>                                    
+                    <div class="row options">
+                        <div class="option" [ngClass]="{'selected': selected1 == 'upload'}" (click)="select('upload')">
+                            <div class="image">
+                                <img src="assets/images/file.svg">
+                            </div>              
+                            <div class="header-text">
+                                Upload an image
+                            </div>
+                        </div>
+                        <div class="option" [ngClass]="{'selected': selected1 == 'text'}" (click)="select('text')">
+                            <div class="image">
+                                <img src="assets/images/text.svg">
+                            </div>              
+                            <div class="header-text">
+                                Enter text
+                            </div>
+                        </div>
+                        <div class="option" [ngClass]="{'selected': selected1 == 'voice'}" (click)="select('voice')">
+                            <div class="image">
+                                <img src="assets/images/voice.svg">
+                            </div>              
+                            <div class="header-text">
+                                Speak out
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </mat-step>
+            <mat-step>
+                <ng-template matStepLabel>Your answer type</ng-template>
+                <div class="column center">
+                    <div class="header-text">Choose one of these</div>                                    
+                    <div class="row options">
+                        <div class="option" [ngClass]="{'selected': selected2 == 'answer'}" (click)="selectType('answer')">
+                            <div class="image">
+                                <img src="assets/images/answer.svg">
+                            </div>              
+                            <div class="header-text">
+                                Find an answer
+                            </div>
+                        </div>
+                        <div class="option" [ngClass]="{'selected': selected2 == 'visualise'}" (click)="selectType('visualise')">
+                            <div class="image">
+                                <img src="assets/images/visualis.svg">
+                            </div>              
+                            <div class="header-text">
+                                Visualise the answer
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </mat-step>
+            <mat-step>
+                <ng-template matStepLabel>Your input</ng-template>
+                <div class="row selected-display">
+                    <div class="column col-1">
+                        <div class="image">
+                            <ng-container *ngIf="selected1 == 'text'">
+                                <img src="assets/images/text.svg">
+                            </ng-container>
+                            <ng-container *ngIf="selected1 == 'voice'">
+                                <img src="assets/images/voice.svg">
+                            </ng-container>
+                            <ng-container *ngIf="selected1 == 'upload'">
+                                <img src="assets/images/file.svg">
+                            </ng-container>
+                        </div>              
+                        <div class="header-text">
+                            You chose 
+                            <ng-container *ngIf="selected1 == 'text'">
+                                to type something
+                            </ng-container>
+                            <ng-container *ngIf="selected1 == 'voice'">
+                                to speak out
+                            </ng-container>
+                            <ng-container *ngIf="selected1 == 'upload'">
+                                to upload a file
+                            </ng-container>
+                        </div>                    
+                    </div>                                      
+                    <div class="column col-2">
+                        <ng-container *ngIf="selected1 == 'text'">
+                            <div class="text-input">
+                                  <mat-form-field style="width: 100%;" appearance="outline">
+                                    <mat-label>Your search query</mat-label>
+                                    <textarea matInput [formControl]="enteredText" placeholder="Placeholder"></textarea>
+                                    <mat-hint>She sells sea shells on the sea shore</mat-hint>
+                                </mat-form-field>
+                            </div>
+                        </ng-container>
+                        <ng-container *ngIf="selected1 == 'voice'">
+                            to speak out
+                        </ng-container>
+                        <ng-container *ngIf="selected1 == 'upload'">
+                            <div class="row">
+                                <div>
+                                    <mat-form-field appearance="legacy">
+                                        <input matInput placeholder="File name" disabled>
+                                        <mat-hint>Choose a file</mat-hint>
+                                    </mat-form-field>
+                                </div>
+                                <div style="margin-left: 10px;">
+                                    <button mat-fab color="primary" aria-label="Example icon button with a bookmark icon">
+                                        <mat-icon>attach_file</mat-icon>
+                                    </button>
+                                </div>
+                            </div>
+                        </ng-container>
+                        <button class="margin" mat-raised-button (click)="getAnswer()" color="primary">Get the answer</button>
+                        <button class="margin" mat-button (click)="stepper.previous()">Go back</button>                        
+                    </div>                                        
+                </div>
+            </mat-step>
+          </mat-horizontal-stepper>
+
+    </div>
+    <div class="column column-2">
+        <div class="header-text">Suggestions for you</div>                
+        <div *ngIf="suggestions.length == 0"> No suggestions to show </div>
+        <mat-card *ngFor="let suggestion of suggestions">
+            <div>
+                {{suggestion.search}}
+            </div>                    
+            <div class="row align-end-between">
+                <div></div>
+                <div>
+                    <button (click)="visualise(suggestion.search)" mat-button color="primary">
+                        Visualise
+                    </button>
+                </div>
+            </div>
+        </mat-card>
+    </div>
+
+</div>

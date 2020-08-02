@@ -1,1 +1,18 @@
-<p>upload-document works!</p>
+<div class="column max-size">
+    <mat-form-field class="example-full-width">
+        <mat-label>Name of upload</mat-label>
+        <input matInput placeholder="Ex. Pizza" [formControl]="name">
+    </mat-form-field>
+    <button type="button" mat-button (click)="fileInput.click()">Choose File</button>
+    <input hidden (change)="onFileSelected($event)" #fileInput type="file" id="file">
+    <button (click)="submit()" color="primary" mat-raised-button>
+        <ng-container *ngIf="fetchedResponse == false">
+            <div class="padding: 4px 0px">
+                <mat-spinner style="margin: 0 auto;" diameter="30" color="accent"></mat-spinner>
+            </div>
+        </ng-container>
+        <ng-container *ngIf="fetchedResponse == true">
+            Upload file
+        </ng-container>
+    </button>
+</div>

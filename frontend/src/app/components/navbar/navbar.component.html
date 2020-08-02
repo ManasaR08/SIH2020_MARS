@@ -1,1 +1,40 @@
-<p>navbar works!</p>
+<div class="column navbar">
+    <div class="brand">
+        <img class="logo" src="assets/images/logo.png"> araDemic
+    </div>
+    <div class="options">
+        <a [routerLink]="['/dashboard']" class="nav-icon">
+            <mat-icon class="icon">home</mat-icon>
+            Your homepage            
+        </a>
+        <a *ngIf="access == 'student'" [routerLink]="['/dashboard/view/teachers']" class="nav-icon">
+            <mat-icon class="icon">face</mat-icon>
+            Your teachers            
+        </a>
+        <a *ngIf="access == 'teacher'" [routerLink]="['/dashboard/view/students']" class="nav-icon">
+            <mat-icon class="icon">face</mat-icon>
+            Your students            
+        </a>
+        <a *ngIf="access == 'teacher'" [routerLink]="['/dashboard/view/uploads']" class="nav-icon">
+            <mat-icon class="icon">cloud_upload</mat-icon>
+            Your uploads            
+        </a>
+
+        <a *ngIf="access == 'student'" [routerLink]="['/dashboard/view/searches']" class="nav-icon">
+            <mat-icon class="icon">search</mat-icon>
+            Your searches           
+        </a>
+        <div *ngIf="access == 'student'" class="nav-icon" (click)="navigateToAdd()">
+            <button mat-raised-button color="accent">
+                <mat-icon class="icon">add</mat-icon>
+                Search something
+            </button>
+        </div>
+    </div>
+    <div class="logout">
+        <div class="nav-icon">
+            <mat-icon class="icon-logout">exit_to_app</mat-icon>
+            Leave the room
+        </div>
+    </div>
+</div>

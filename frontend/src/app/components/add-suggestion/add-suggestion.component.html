@@ -1,1 +1,7 @@
-<p>add-suggestion works!</p>
+<div class="column max-size">
+    <mat-form-field class="example-full-width">
+        <mat-label>Suggestion</mat-label>
+        <textarea matInput placeholder="Ex. Pizza" [formControl]="text"></textarea>
+    </mat-form-field>
+    <button (click)="submit()" color="primary" mat-raised-button>Add suggestion</button>
+</div>

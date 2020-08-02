@@ -31,6 +31,8 @@ import { DashboardUserComponent } from './pages/dashboard-user/dashboard-user.co
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { DashboardResultComponent } from './pages/dashboard-result/dashboard-result.component';
+import { AuthGuardService } from './_guards/auth.guard';
+import { TokenInterceptor } from './_interceptors/token.interceptor';
 import { LoadingComponent } from './components/loading/loading.component';
 import { UploadDocumentComponent } from './components/upload-document/upload-document.component';
 import { AddSuggestionComponent } from './components/add-suggestion/add-suggestion.component';
@@ -71,6 +73,7 @@ import { AddSuggestionComponent } from './components/add-suggestion/add-suggesti
     StoreModule.forRoot({ UserStateReducer, UserDataReducer })    
   ],
   providers: [
+    AuthGuardService,
     {
       provide: MatDialogRef,
       useValue: {}
@@ -78,6 +81,11 @@ import { AddSuggestionComponent } from './components/add-suggestion/add-suggesti
     {
       provide: MatBottomSheetRef,
       useValue: {}
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
     },
   ],
   bootstrap: [AppComponent]

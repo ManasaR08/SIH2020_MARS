@@ -1,1 +1,178 @@
-<p>dashboard-user works!</p>
+<div class="row same-height">
+    <div class="name-col">
+        <div class="col">
+            <div class="name">
+                {{name}}
+            </div>
+            <div class="status">
+                {{type}}
+            </div>
+        </div>
+    </div>
+    <div class="additional-col">
+        <div class="col" style="background-color: #f8e9a1;" *ngIf="type == 'student'">        
+            <div class="number">
+                {{searches.length}}
+            </div>
+            <div class="text">
+                searches
+            </div>
+        </div>
+    </div>
+    <div class="additional-col">
+        <div class="col" style="background-color: #f8e9a1;" *ngIf="type == 'student'">        
+            <div class="number">
+                {{teachers.length}}
+            </div>
+            <div class="text">
+                teachers
+            </div>
+        </div>
+    </div>
+    <div class="additional-col">
+        <div class="col" style="background-color: #f8e9a1;" *ngIf="type == 'teacher'">        
+            <div class="number">
+                {{uploads.length}}
+            </div>
+            <div class="text">
+                uploads
+            </div>
+        </div>
+    </div>
+    <div class="additional-col">
+        <div class="col" style="background-color: #f8e9a1;" *ngIf="type == 'teacher'">        
+            <div class="number">
+                {{students.length}}
+            </div>
+            <div class="text">
+                students
+            </div>
+        </div>
+    </div>
+</div>
+<ng-container *ngIf="type == 'teacher'">
+    <div class="row">
+        <div class="teacher-data-col">
+            <div class="row align-center-between">
+                <div class="header-text">
+                    Uploaded documents
+                </div>
+                <div>
+                    <button mat-button color="basic">
+                        Sort by
+                    </button>
+                </div>
+            </div>
+            <div class="cards">
+                <div *ngIf="uploads.length == 0">No uploads to show</div>
+                <div class="card-container" *ngFor="let upload of uploads">
+                    <mat-card>
+                        <div class="row align-center-between">
+                            <div class="subtitle">
+                                {{upload.name}}
+                            </div>
+                        </div>
+                        <div class="row align-center-between">
+                            <div></div>
+                            <div class="row">
+                                <a href="{{upload.pdf}}"><button style="margin-right: 10px;" mat-flat-button color="accent">Download PDF</button></a>
+                                <a href="{{upload.ppt}}"><button mat-flat-button color="primary">Download PPT</button></a>
+                            </div>
+                        </div>
+                    </mat-card>
+                </div>
+            </div>
+        </div>
+        <div class="users-in-teacher-col">
+            <div class="row align-center-between">
+                <div class="header-text">
+                    Students under teacher
+                </div>
+                <div>
+                    <button mat-button color="basic">
+                        Sort by
+                    </button>
+                </div>
+            </div>
+            <div class="cards">
+                <div *ngIf="students.length == 0">No students to show</div>
+                <div class="card-container" *ngFor="let student of students">
+                    <mat-card>
+                        <div class="row align-center-between">
+                            <div class="user row">
+                                <div>
+                                    <img class="image" src="assets/images/teacher.png">                       
+                                </div>
+                                <div class="column user-details">
+                                    <div class="name">
+                                        {{student.name}}
+                                    </div>
+                                    <!-- <div class="sub-title">
+                                        33 searches
+                                    </div> -->
+                                </div>
+                            </div>
+                        </div>
+                    </mat-card>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-container>
+
+<ng-container *ngIf="type == 'student'">
+    <div class="row data-main">
+        <div class="data-col">
+            <div class="header-text">User searches</div>
+            <div class="cards">
+                <div *ngIf="searches.length == 0">No searches to show</div>
+                <div class="card-container" *ngFor="let search of searches">
+                    <mat-card>
+                        <div class="column">
+                            <div>
+                                {{search.search}}
+                            </div>                            
+                            <div class="row align-center-between">
+                                <div></div>
+                                <div>
+                                    <button mat-button color="primary" (click)="viewResult()">
+                                        View result
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </mat-card>
+                </div>
+            </div>
+        </div>
+        <div class="data-col">
+            <div class="row align-center-between">
+                <div class="header-text">Suggestions made</div>
+                <div>
+                    <button mat-button (click)="addSuggestion()">Add</button>
+                </div>
+            </div>
+
+            <div class="cards">
+                <div *ngIf="suggestions.length == 0">No suggestions to show</div>
+                <div class="card-container" *ngFor="let suggestion of suggestions">
+                    <mat-card>
+                        <div class="column">
+                            <div>
+                                {{suggestion.search}}
+                            </div>                            
+                            <div class="row align-center-between">
+                                <div></div>
+                                <div>
+                                    <!-- <button mat-button color="accent">
+                                        View result
+                                    </button> -->
+                                </div>
+                            </div>
+                        </div>
+                    </mat-card>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-container>

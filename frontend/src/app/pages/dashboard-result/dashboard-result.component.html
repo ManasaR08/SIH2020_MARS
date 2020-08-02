@@ -1,1 +1,87 @@
-<p>dashboard-result works!</p>
+<div class="row align-center-between">
+    <div class="header">
+        Your results await...
+    </div>    
+    <div>
+        <button (click)="navigateToAdd()" mat-raised-button color="accent">
+            <mat-icon class="icon">add</mat-icon>
+            Search something else
+        </button>
+    </div>
+</div>
+<div class="row main">
+    <div class="row column-1">
+        <div class="image-enc">
+            <img class="image" src="assets/images/image.png">
+        </div>
+        <div class="controls">
+            <div class="sub-header">Text</div>
+            <div class="text">Lorem ipsum dolor sit, amet consectetur adipisicing elit</div>
+            <div class="sub-header">Controls</div>
+            <div class="option">
+                <button mat-flat-button color="primary">
+                    <mat-icon>play_arrow</mat-icon>Play sound
+                </button>
+            </div>
+            <div class="option">
+                <button mat-flat-button color="warn">
+                    <mat-icon>stop</mat-icon>
+                    Stop sound
+                </button>
+            </div>
+            <div class="margin option">
+                <button mat-flat-button color="primary">
+                    <mat-icon>skip_previous</mat-icon>Previous line</button>
+            </div>
+            <div class="option">
+                <button mat-flat-button color="primary">
+                    <mat-icon>skip_next</mat-icon>Next line</button>
+            </div>
+        </div>
+    </div>
+    <div class="column column-2">
+        <div class="header-text">Upcoming...</div>
+        <div class="line">
+            <div class="play-option">
+                <mat-icon>play_arrow</mat-icon>
+                Play video
+            </div>
+            <div class="row sub-play">
+                <div class="sub-image">
+                    <img src="assets/images/image.png" class="image">
+                </div>
+                <div class="text">
+                    Lorem ipsum dolor sit, amet consectetur adipisicing elit. 
+                </div>
+            </div>
+        </div>
+        <div class="line">
+            <div class="play-option">
+                <mat-icon>play_arrow</mat-icon>
+                Play video
+            </div>
+            <div class="row sub-play">
+                <div class="sub-image">
+                    <img src="assets/images/image.png" class="image">
+                </div>
+                <div class="text">
+                    Lorem ipsum dolor sit, amet consectetur adipisicing elit. 
+                </div>
+            </div>
+        </div>
+        <div class="line">
+            <div class="play-option">
+                <mat-icon>play_arrow</mat-icon>
+                Play video
+            </div>
+            <div class="row sub-play">
+                <div class="sub-image">
+                    <img src="assets/images/image.png" class="image">
+                </div>
+                <div class="text">
+                    Lorem ipsum dolor sit, amet consectetur adipisicing elit. 
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

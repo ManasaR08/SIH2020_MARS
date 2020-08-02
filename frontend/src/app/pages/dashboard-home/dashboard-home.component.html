@@ -1,1 +1,99 @@
-<p>dashboard-home works!</p>
+<div class="row">
+    <div class="column column-1">
+        <div class="row banner">
+            <div class="banner-image">
+                <img src="assets/images/home.svg" alt="">
+            </div>
+            <div class="banner-content">
+                <ng-container *ngIf="access == 'student'">
+                    <h1>Learn something today, from your home... At your own pace</h1>
+                    <button (click)="navigateToAdd()" mat-raised-button color="accent">
+                        <mat-icon class="icon">add</mat-icon>
+                        Search something now
+                    </button>
+                </ng-container>
+                <ng-container *ngIf="access == 'teacher'">
+                    <h1>See what your students are learning, from the comfort of your home...</h1>
+                </ng-container>
+            </div>            
+        </div>
+        <div class="row col-on-mobile">
+            <!------------------Student---------------------->
+            <div class="sub-column" *ngIf="access == 'student'">
+                <div class="header-text">Popular Teachers</div>
+                <div *ngIf="popularTeachers.length == 0">No teachers to show</div>
+                <mat-card *ngFor="let teacher of popularTeachers">
+                    <div class="row align-end-between">
+                        <div class="row user">
+                            <div>
+                                <img src="assets/images/teacher.png">
+                            </div>
+                            <div class="column">
+                                <div class="name">
+                                    {{ teacher.name }}
+                                </div>
+                                <div class="number">
+                                    {{ teacher.uploads.length }} documents
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <button (click)="joinClass(teacher._id)" mat-button color="primary">
+                                Join class
+                            </button>
+                        </div>
+                    </div>
+                </mat-card>
+                
+            </div>
+            <div class="sub-column" *ngIf="access == 'student'">
+                <div class="header-text">Suggestions for you</div>                
+                <div *ngIf="suggestions.length == 0">No suggestions to show</div>
+                <mat-card *ngFor="let suggestion of suggestions">
+                    <div>
+                        {{suggestion.search}}
+                    </div>                    
+                    <div class="row align-end-between">
+                        <div></div>
+                        <div>
+                            <button mat-button color="primary" (click)="visualise(suggestion.text)">
+                                Visualise
+                            </button>
+                        </div>
+                    </div>
+                </mat-card>
+            </div>
+
+            <!------------------Teacher------------------------>
+            <div class="sub-column" *ngIf="access == 'teacher'">
+                <div class="header-text">Recently joined students</div>
+                <div *ngIf="students.length == 0">No students to show</div>
+            </div>
+            <div class="sub-column" *ngIf="access == 'teacher'">
+                <div class="header-text">Recent Uploads</div>
+                <div *ngIf="uploads.length == 0">No uploads to show</div>
+            </div>
+        </div>
+    </div>
+    <div class="column column-2">
+        <!--------------- Todays line. Most common suggestion values ----------------->
+        <div (click)="visualise('She sells sea shells')" *ngIf="access == 'student'" class="banner" style="background-color: #f8e9a1; cursor: pointer;" role="button">
+            <h2>
+                Today's special <br><br>She sells sea shells
+            </h2>
+            <button mat-raised-button color="primary">Visualise</button>
+        </div>        
+        <div *ngIf="access == 'teacher'" class="banner" style="background-color: #f8e9a1; cursor: pointer;">
+            <h2>
+                Convert a PDF to PPT, with just a click
+            </h2>
+            <a [routerLink]="['/dashboard/view/uploads']">
+                <button mat-raised-button color="primary">Upload a document</button>
+            </a>
+        </div>
+        <div class="column center">
+            <img src="assets/images/text.svg" style="width: 80%; margin-top: 20px;">
+        </div>
+    </div>
+</div>

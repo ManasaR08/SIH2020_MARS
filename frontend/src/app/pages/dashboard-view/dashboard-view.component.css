@@ -1,0 +1,103 @@
+.column-1{
+    width: 75%;
+    padding: 10px 20px;
+}
+.search-new{
+    display: none;
+}
+.column-2{
+    width: 25%;
+    padding: 10px 20px;
+}
+.center{
+    align-items: center; justify-content: center;
+    margin-bottom: 30px;
+}
+
+.banner {
+    padding: 30px 10px;
+    background-color: var(--custom-yellow);
+    border-radius: 10px;
+}
+
+.banner .image{
+    width: 100%;
+}
+
+.align-center-between{
+    align-items: center; justify-content: space-between;
+}
+.user{
+    align-items: center;
+}
+.image{
+    width: 50px;
+}
+.user-details{
+    margin-left: 10px;
+}
+.name{
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+.sub-title{
+    font-size: 1.1rem;
+    color: rgb(63, 63, 63);
+}
+.header-text{
+    font-size: 1.2rem; font-weight: bold;
+}
+.cards{
+    width: 100%;
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+.card-container{
+    width: 50%; padding: 5px 10px;
+}
+@media only screen and (max-width: 920px) {
+    .column-1{
+        width: 70%;
+    }
+    .column-2{
+        width: 30%;
+    }   
+}
+
+@media only screen and (max-width: 890px) {
+    .column-1{
+        width: 100%;
+    }
+    .column-2{
+        display: none;
+        width: 0%;
+    }   
+    .search-new{
+        display: block;
+        margin-bottom: 10px;
+    }
+}
+@media only screen and (max-width: 648px) {
+    .card-container{
+        width: 100%;
+    }
+}
+
+
+.options{
+    align-items: baseline;
+    font-weight: bold;
+    font-size: 1rem;
+}
+.option-1{
+    font-size: 1.3rem;
+    cursor: pointer;
+    margin: 0px 5px;
+}
+.option-2{
+    color: rgb(107, 107, 107);
+    cursor: pointer;
+    margin: 0px 5px;
+}

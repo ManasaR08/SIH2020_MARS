@@ -1,1 +1,193 @@
-<p>dashboard-view works!</p>
+<div class="row main">
+    <div class="column column-1">
+
+        <ng-container *ngIf="type == 'students'">
+            <div class="row options">
+                <div class="option-1" (click)="toggle()">
+                    {{option1}}
+                </div>
+            </div>
+            <div class="cards">
+                <div *ngIf="users.length == 0">No students under you currently</div>
+                <div class="card-container" *ngFor="let student of users">
+                    <mat-card>
+                        <div class="row align-center-between">
+                            <div class="user row">
+                                <div>
+                                    <img class="image" src="assets/images/teacher.png">                       
+                                </div>
+                                <div class="column user-details">
+                                    <div class="name">
+                                        {{student.name}}
+                                    </div>
+                                    <div class="sub-title">
+                                        {{student.searches.length}} searches
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <button mat-button (click)="viewStudent(student._id)" color="primary">
+                                    View student
+                                </button>
+                            </div>
+                        </div>
+                    </mat-card>
+                </div>
+            </div>
+        </ng-container>
+
+        <ng-container *ngIf="type == 'teachers'">
+            <div class="row options">
+                <div class="option-1" (click)="toggle()">
+                    {{option1}}
+                </div>
+                <div class="option-2" (click)="toggle()">
+                    {{option2}}
+                </div>
+            </div>
+            <div class="cards">
+                <div *ngIf="teachersToShow.length == 0">No teachers to show</div>
+                <div class="card-container" *ngFor="let teacher of teachersToShow">
+                    <mat-card>
+                        <div class="row align-center-between">
+                            <div class="user row">
+                                <div>
+                                    <img class="image" src="assets/images/teacher.png">                       
+                                </div>
+                                <div class="column user-details">
+                                    <div class="name">
+                                        {{teacher.name}}
+                                    </div>
+                                    <div class="sub-title">
+                                        {{teacher.uploads.length}} uploads
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <button (click)="viewTeacher(teacher._id)" *ngIf="option1 == 'Your teachers'" mat-button color="primary">
+                                    View uploads
+                                </button>
+                                <button (click)="joinTeacher(teacher.name,teacher._id, teacher.uploads)" *ngIf="option1 != 'Your teachers'" mat-button color="primary">
+                                    Add teacher
+                                </button>
+                            </div>
+                        </div>
+                    </mat-card>
+                </div>
+            </div>
+        </ng-container>
+
+        <ng-container *ngIf="type == 'searches'">
+            <div class="search-new">
+                <button (click)="navigateToAdd()" mat-raised-button color="accent">
+                    <mat-icon class="icon">add</mat-icon>
+                    Search something now
+                </button>    
+            </div>
+            <div class="row options">
+                <div class="option-1" (click)="toggle()">
+                    {{option1}}
+                </div>
+                <div class="option-2" (click)="toggle()">
+                    {{option2}}
+                </div>
+            </div>
+            <div class="cards">
+                <div *ngIf="searchesToShow.length == 0">
+                    <ng-container *ngIf="option1 == 'Your searches'">No searches made</ng-container>
+                    <ng-container *ngIf="option1 != 'Your searches'">No suggestions made for you</ng-container>
+                </div>
+                <div class="card-container" *ngFor="let search of searchesToShow">
+                    <mat-card>
+                        <div class="column">
+                            <div>
+                                {{search.search}}
+                            </div>                            
+                            <div class="row align-center-between">
+                                <div></div>
+                                <div>
+                                    <button *ngIf="option1 == 'Your searches'" (click)="viewSearchResult(search._id)" mat-button color="primary">
+                                        View result
+                                    </button>
+                                    <button *ngIf="option1 != 'Your searches'" (click)="visualiseSearch(search.search)" mat-button color="primary">
+                                        Visualise
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </mat-card>
+                </div>
+            </div>
+        </ng-container>
+
+        <ng-container *ngIf="type == 'uploads'">
+            <div class="row options align-center-between">
+                <div class="option-1">
+                    {{option1}}
+                </div>
+                <div>
+                    <button (click)="addDocument()" mat-raised-button color="accent">Upload</button>
+                </div>
+            </div>
+            <div class="cards">
+                <div *ngIf="uploads.length == 0">No documents uploaded</div>
+                <div class="card-container" *ngFor="let upload of uploads">
+                    <mat-card>
+                        <div class="row align-center-between">
+                            <div class="subtitle">
+                                {{upload.name}}
+                            </div>
+                        </div>
+                        <div style="margin-top: 10px;" class="row align-center-between">
+                            <div></div>
+                            <div class="row">
+                                <a href="{{upload.pdf}}"><button style="margin-right: 10px;" mat-flat-button color="primary">Download PDF</button></a>
+                                <a href="{{upload.ppt}}"><button mat-flat-button color="accent">Download PPT</button></a>
+                                <button (click)="deleteDocument(upload._id)" mat-icon-button color="error"><mat-icon>delete</mat-icon></button>
+                            </div>
+                        </div>
+                    </mat-card>
+                </div>
+            </div>
+        </ng-container>
+    </div>
+    <div class="column column-2">
+        <div class="banner">
+            <div class="text">
+                <ng-container *ngIf="type == 'teachers' || type == 'uploads'">
+                    <h3>
+                        Get access to documents uploaded by all your teachers, and ask questions on those documents on the go...
+                        <br><br>
+                        Take control of your education, at your own pace
+                    </h3>
+                </ng-container>
+                <ng-container *ngIf="type == 'students'">
+                    <h3>
+                        Automatically convert a PDF to ordered presentations, and track what your students search, from the comfort of your room...
+                        <br><br>
+                        Help them learn being independant, but also guide them in the right direction
+                    </h3>
+                </ng-container>
+                <ng-container *ngIf="type == 'searches'">
+                    <h3>
+                        Learn something new today...
+                    </h3>                    
+                    <br>
+                    <button (click)="navigateToAdd()" mat-raised-button color="primary">
+                        <mat-icon class="icon">add</mat-icon>
+                        Search something
+                    </button>    
+                </ng-container>
+            </div>
+            <div class="image">
+                <ng-container *ngIf="type != 'searches'">
+                    <img src="assets/images/students.svg">
+                </ng-container>
+                <ng-container *ngIf="type == 'searches'">
+                    <img src="assets/images/home.svg">
+                </ng-container>
+            </div>
+        </div>
+    </div>
+</div>
+            

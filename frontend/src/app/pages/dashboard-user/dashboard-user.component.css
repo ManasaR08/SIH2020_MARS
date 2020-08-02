@@ -1,0 +1,121 @@
+.name-col{
+    width: 60%;
+    padding: 10px;
+    flex: 1 auto;
+}
+.name-col .col{
+    border-radius: 10px;
+    background-color: #a8d0e6;
+    padding: 30px;
+    height: 100%; width: 100%;
+}
+.additional-col{
+    width: 20%;
+    padding: 10px;
+    flex: 1 auto;
+}
+.additional-col .col{
+    height: 100%; width: 100%;
+    display: flex;
+    flex-direction: column; -ms-flex-direction: column;
+    align-items: center; justify-content: center;
+    padding: 30px;
+    border-radius: 10px;
+}
+
+.number{
+    font-size: 2.3rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+.name{
+    font-weight: bold;
+    font-size: 1.4rem;
+}
+.status{
+    font-size: 1.1rem;
+    margin-top: 10px;
+    color: rgb(71, 71, 71);
+}.data-main{
+    margin-top: 15px;
+}
+.data-col{
+    width: 50%;    
+}
+.header-text{
+    font-weight: bold;
+    font-size: 1rem;
+}
+.cards{
+    width: 100%;
+    margin-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+.align-center-between{
+    align-items: center; justify-content: space-between;
+}
+.card-container{
+    width: 50%; padding: 5px 10px;
+}
+@media only screen and (max-width: 588px) {
+    .data-col{
+        width: 100%;    
+    }
+    .data-main{
+        flex-direction: column; -ms-flex-direction: column;
+    }
+    .name-col{
+        width: 100%;
+    }
+    .additional-col{
+        width: 0%; display: none;
+    }   
+}
+
+@media only screen and (max-width: 648px) {
+    .card-container{
+        width: 100%;
+    }
+}
+
+.teacher-data-col{
+    padding: 10px;
+    width: 60%;
+}
+.users-in-teacher-col{
+    padding: 10px;
+    width: 40%;
+}
+.user{
+    align-items: center;
+}
+.image{
+    width: 50px;
+}
+.user-details{
+    margin-left: 10px;
+}
+.name{
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+.sub-title{
+    font-size: 1.1rem;
+    color: rgb(63, 63, 63);
+}
+@media only screen and (max-width: 588px) {
+    .teacher-data-col{
+        width: 100%;    
+    }
+    .users-in-teacher-col{
+        width: 0%; display: none;
+    }   
+}
+
+@media only screen and (max-width: 1050px) {
+    .card-container{
+        width: 100%;
+    }
+}
