@@ -5,6 +5,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import {MatExpansionModule} from '@angular/material/expansion';
+import {MatTabsModule} from '@angular/material/tabs';
+
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
@@ -36,6 +39,7 @@ import { TokenInterceptor } from './_interceptors/token.interceptor';
 import { LoadingComponent } from './components/loading/loading.component';
 import { UploadDocumentComponent } from './components/upload-document/upload-document.component';
 import { AddSuggestionComponent } from './components/add-suggestion/add-suggestion.component';
+import { QuestionsComponent } from './pages/questions/questions.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -50,7 +54,8 @@ import { AddSuggestionComponent } from './components/add-suggestion/add-suggesti
     DashboardResultComponent,
     LoadingComponent,
     UploadDocumentComponent,
-    AddSuggestionComponent
+    AddSuggestionComponent,
+    QuestionsComponent
   ],
   imports: [
     BrowserModule,
@@ -59,8 +64,10 @@ import { AddSuggestionComponent } from './components/add-suggestion/add-suggesti
     HttpClientModule,
     MatProgressSpinnerModule,
     AppRoutingModule,
+    MatTabsModule,
     BrowserAnimationsModule,
     MatSidenavModule,
+    MatExpansionModule,
     MatIconModule,
     MatButtonModule,
     MatFormFieldModule,

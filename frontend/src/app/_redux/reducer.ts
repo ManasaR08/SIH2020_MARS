@@ -44,6 +44,7 @@ export interface DataState {
     students: any[];
     uploads: any[];
     current_user_view: string;
+    currentQuestion: string;
 }
 export const INITIAL_DATA_STATE: DataState = {
     suggestions: [],
@@ -53,7 +54,8 @@ export const INITIAL_DATA_STATE: DataState = {
     suggestedTeachers: [],
     students: [],
     uploads: [],
-    current_user_view: null
+    current_user_view: null,
+    currentQuestion: null
 };
 
 export const UserDataReducer = (state = INITIAL_DATA_STATE, action) => {
@@ -117,6 +119,10 @@ export const UserDataReducer = (state = INITIAL_DATA_STATE, action) => {
         case 'SET_CURRENT_USER_VIEW':
             return {
                 ...state, current_user_view: action.payload
+            }
+        case 'SET_CURRENT_QUESTION':
+            return {
+                ...state, currentQuestion: action.payload
             }
         case 'RESET_DATA_STATE':
             return {

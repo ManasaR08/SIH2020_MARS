@@ -48,7 +48,9 @@ export class BackendService extends UrlService {
   getResult(searchId) {
     return this.http.post(this.getResultUrl, {searchId});
   }
-
+  getQuestions(questionId) {
+    return this.http.post(this.questionUrl, {questionId});
+  }
   getStudents() {
     return this.http.get(this.studentForTeacherUrl);
   }

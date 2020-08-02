@@ -1,16 +1,24 @@
 const Teacher = require('../models/teacher');
 const Upload = require('../models/upload');
+const Question = require('../models/question');
 
 module.exports = {
     addUpload: async (teacherId, ppt, pdf, name, questionBank) => {
         try {
+            let question = new Question({
+                ...questionBank
+            });
+            question = await question.save();
+            if (question == null) return {success: false};
+
             let upload = new Upload({
                 ppt,
                 pdf,
-                questionBank,
+                questions: question._id,
                 name
             });
             upload = await upload.save();
+
             
             if (upload == null) return {success: false};
             const updated = await Teacher.findOneAndUpdate({_id: teacherId}, {'$push': {uploads: upload._id}});

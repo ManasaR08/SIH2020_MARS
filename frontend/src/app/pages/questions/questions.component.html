@@ -1,0 +1,100 @@
+<div class="row main">
+    <div class="column column-1">
+        <div class="header-text">Questions generate</div>
+        <mat-tab-group>
+            <mat-tab label="Short Answer">
+                <mat-accordion>
+                    <mat-expansion-panel (opened)="panelOpenState = true"
+                                         (closed)="panelOpenState = false">
+                      <mat-expansion-panel-header>
+                        <mat-panel-header>
+                            <div  class="padding">
+                                <span class="bold">Q1. </span>
+                                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Facere maiores laudantium tempora voluptas, eius nam quaerat cupiditate! Eum delectus, exercitationem eos ullam dignissimos id, repellat, corporis eaque veritatis unde dolores?                                
+                            </div>
+                        </mat-panel-header>
+                      </mat-expansion-panel-header>
+                      <div class="padding">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati numquam cupiditate reprehenderit nesciunt expedita asperiores totam in ullam tenetur provident ad, quia voluptatum magni assumenda, aperiam, quas fugit accusantium exercitationem.</p>
+                      </div>
+                    </mat-expansion-panel>
+                </mat-accordion>
+            </mat-tab>
+            <mat-tab label="Fill in the blanks">
+                <mat-accordion>
+                    <mat-expansion-panel (opened)="panelOpenState = true"
+                                         (closed)="panelOpenState = false">
+                      <mat-expansion-panel-header>
+                        <mat-panel-header>
+                            <div  class="padding">
+                                <span class="bold">Q1. </span>
+                                Lorem, ipsum dolor sit ame ___________ _________t consectetur ium tempora voluptas, eius nam quaerat cupiditate! Eum delectus, exercitationem eos ullam dignissimos id, repellat, corporis eaque veritatis unde dolores?                                
+                            </div>
+                        </mat-panel-header>
+                      </mat-expansion-panel-header>
+                      <div class="padding">
+                        <p>lorem ipsum</p>
+                      </div>
+                    </mat-expansion-panel>
+                </mat-accordion>
+            </mat-tab>
+            <mat-tab label="Multiple Choice">
+                <mat-accordion>
+                    <mat-expansion-panel (opened)="panelOpenState = true"
+                                         (closed)="panelOpenState = false">
+                      <mat-expansion-panel-header collapsedHeight="*" expandedHeight="*">
+                        <mat-panel-header>
+                            <div  class="padding">
+                                <span class="bold">Q1. </span>
+                                Lorem, ipsum dolor sit ame ___________ _________t consectetur ium tempora voluptas, eius nam quaerat cupiditate! Eum delectus, exercitationem eos ullam dignissimos id, repellat, corporis eaque veritatis unde dolores?                                
+                                <br>
+                                [A] FOr narnia <br>
+                                [A] FOr narnia <br>
+                                [A] FOr narnia <br>
+                                [A] FOr narnia <br>
+                            </div>
+                        </mat-panel-header>
+                      </mat-expansion-panel-header>
+                      <div class="padding">
+                        <p>[A] For narnia</p>
+                      </div>
+                    </mat-expansion-panel>
+                </mat-accordion>
+            </mat-tab>
+            <mat-tab label="True/False">
+                <mat-accordion>
+                    <mat-expansion-panel (opened)="panelOpenState = true"
+                                         (closed)="panelOpenState = false">
+                      <mat-expansion-panel-header collapsedHeight="*" expandedHeight="*">
+                        <mat-panel-header>
+                            <div  class="padding">
+                                <span class="bold">Q1. </span>
+                                Lorem, ipsum dolor sit ame ___________ _________t consectetur ium tempora voluptas, eius nam quaerat cupiditate! Eum delectus, exercitationem eos ullam dignissimos id, repellat, corporis eaque veritatis unde dolores?                                
+                                <br>
+                                True<br>
+                                False<br>
+                            </div>
+                        </mat-panel-header>
+                      </mat-expansion-panel-header>
+                      <div class="padding">
+                        <p>True <br> Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iste beatae deserunt doloribus voluptatibus quo. Quasi, rerum corrupti. Ab id nisi quos minus quasi amet laborum, quibusdam nihil rerum modi cumque.</p>
+                      </div>
+                    </mat-expansion-panel>
+                </mat-accordion>
+            </mat-tab>
+        </mat-tab-group>
+    </div>
+    <div class="column column-2">
+        <div class="header-text">More uploads</div>
+        <div *ngIf="uploads.length == 0">No documents uploaded</div>
+        <div class="card-container" *ngFor="let upload of uploads">
+            <mat-card>
+                <div class="row align-center-between" (click)="fetchQuestions(upload.question)">
+                    <div class="subtitle">
+                        {{upload.name}}
+                    </div>
+                </div>
+            </mat-card>
+        </div>
+    </div>
+</div>

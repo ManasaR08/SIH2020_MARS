@@ -6,11 +6,15 @@ const logger = require('./winston');
 const Auth = require('../api/routes/auth');
 const Student = require('../api/routes/student');
 const Teacher = require('../api/routes/teacher');
+const GetQuestion = require('../api/routes/common/getQuestions');
+
 
 const StudentAuth = require('../api/policies/student');
 const TeacherAuth = require('../api/policies/teacher');
+const commonAuth = require('../api/policies/user');
 const upload = require('../api/utils/upload');
 
+router.post('/user/questions', commonAuth, GetQuestion);
 
 router.post('/auth/login', Auth.Login);
 router.post('/auth/signup', Auth.Signup);
