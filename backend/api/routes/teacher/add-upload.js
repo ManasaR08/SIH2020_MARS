@@ -9,11 +9,10 @@ module.exports = async (req, res) => {
         console.log(response);
         if (response.success == false) return res.json({...Success, success: false, message: 'Error generating ppt'});
 
-        let questionBank = ''
-        const added = await addUpload(userId, response.file, pdf, name, questionBank);
+        const added = await addUpload(userId, response.file, pdf, name, response.questions);
 
         if (added.success == false) return res.json({...Success, success: false, message: 'Error adding the pdf as ppt'});
-        return res.json({...Success, pdf, ppt:response.file, id: added.id});
+        return res.json({...Success, pdf, questionBank: response.questions, ppt:response.file, id: added.id});
     } catch(err) {
         console.log(err)
         return res.json(ServerError)

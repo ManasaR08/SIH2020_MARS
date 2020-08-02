@@ -108,7 +108,7 @@ export const UserDataReducer = (state = INITIAL_DATA_STATE, action) => {
             }
         case 'ADD_UPLOAD': 
             return {
-                ...state, uploads: [...state.uploads, {_id: action.payload.id, name: action.payload.name, pdf: action.payload.pdf, ppt: action.payload.ppt}]
+                ...state, uploads: [...state.uploads, {_id: action.payload.id, name: action.payload.name, pdf: action.payload.pdf, ppt: action.payload.ppt, questionBank: action.payload.questions}]
             }
         case 'DELETE_DOCUMENT':
             return {
