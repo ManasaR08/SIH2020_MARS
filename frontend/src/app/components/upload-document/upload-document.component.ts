@@ -30,7 +30,7 @@ export class UploadDocumentComponent implements OnInit {
       if (val.success == true) {
         this._store.dispatch({
           type: 'ADD_UPLOAD',
-          payload: {id: val.id, ppt:val.ppt, pdf:val.pdf, name:this.name.value}
+          payload: {id: val.id, questions: val.questions, ppt:val.ppt, pdf:val.pdf, name:this.name.value}
         });        
         this.fetchedResponse = true;
         this.dialog.closeAll();
