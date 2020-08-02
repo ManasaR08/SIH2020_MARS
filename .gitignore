@@ -13,3 +13,5 @@ backend/.env
 backend/temp
 
 data-prod/
+
+Machine_Learning/__pycache__

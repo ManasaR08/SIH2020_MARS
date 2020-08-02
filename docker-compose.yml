@@ -17,6 +17,15 @@ services:
       - database
     environment:
       - MONGO_URI=mongodb://database/ParaDemic
+  ml:
+    build: Machine_Learning
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./Machine_Learning/:/var/www/app
+    links:
+      - database
+      - express
       
   database:
     image: mongo
