@@ -20,7 +20,7 @@
             <div *ngIf="result.length == 0">No results were found</div>
             <div class="row margin">
                 <div class="option">
-                    <button mat-flat-button color="primary">
+                    <button mat-flat-button color="primary" (click)="playAudio()">
                         Voice over
                     </button>
                 </div>
@@ -69,12 +69,12 @@
                 <div class="sub-header">Controls</div>
                 <div class="row">
                     <div class="option">
-                        <button mat-flat-button color="primary">
+                        <button  (click)="playAudio()" mat-flat-button color="primary">
                             <mat-icon>play_arrow</mat-icon>Play sound
                         </button>
                     </div>
                     <div class="option">
-                        <button mat-flat-button color="warn">
+                        <button (click)="stopAudio()" mat-flat-button color="warn">
                             <mat-icon>stop</mat-icon>
                             Stop sound
                         </button>

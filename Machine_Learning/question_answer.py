@@ -19,28 +19,28 @@ params = (
     ('title', 'Dyslexia'),
 )
 
-def qa_gen(filename):
+def qa_gen(text):
     #r = requests.get(filename, allow_redirects=True)
     #open('temp.pdf', 'wb').write(r.content)
-    pdfFileObj = open(filename, 'rb')
-    pdfReader = PyPDF2.PdfFileReader(pdfFileObj)
+
+    print("Text Length: ", len(text.split()))
     
-    net_text = ''
-    for page in range(pdfReader.numPages):
-        pageObj = pdfReader.getPage(page)
-        content = pageObj.extractText()
-        #print(content)
-        net_text = net_text + content
+    if (len(text.split()) > 2900):
+        data = ' '
+        text_list = text.split()[:2900]
+        data = data.join(text_list)
+    else:
+        data = text
 
-        if len(net_text) > 3000:
-            break
-
-    data = net_text
+    print("Data Length: ", len(data.split()))
 
 
     response = requests.post('https://app.quillionz.com:8243/quillionzapifree/1.0.0/API/SubmitContent_GetQuestions', headers=headers, params=params, data=data.encode('utf-8'))
     response = response.json()
     response = response['Data']
+
+    print()
+    print(response)
 
     output = {}
     output.update({"shortAnswer" : response["shortAnswer"]})
@@ -53,7 +53,9 @@ def qa_gen(filename):
         trueFalse_list = trueFalse_list + qs_list
 
     output.update({"trueFalse" : trueFalse_list})
-    output.update({"whQuestions" : response["whQuestions"]["customQuestions"]})
+
+    with open('response.json', 'w') as fp:
+        json.dump(output, fp)
 
     return output
 

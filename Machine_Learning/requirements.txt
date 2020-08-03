@@ -8,3 +8,5 @@ gTTS
 pydantic
 aiofiles
 PyPDF2
+rake_nltk
+pymongo

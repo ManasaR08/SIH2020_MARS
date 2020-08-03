@@ -1,34 +1,36 @@
-from nltk.corpus import stopwords 
-from nltk.tokenize import word_tokenize 
-  
-# X = input("Enter first string: ").lower() 
-# Y = input("Enter second string: ").lower() 
-X ="I love ghosts"
-Y ="Lights out is a horror movie"
-  
-# tokenization 
-X_list = word_tokenize(X)  
-Y_list = word_tokenize(Y) 
-  
-# sw contains the list of stopwords 
-sw = stopwords.words('english')  
-l1 =[];l2 =[] 
-  
-# remove stop words from the string 
-X_set = {w for w in X_list if not w in sw}  
-Y_set = {w for w in Y_list if not w in sw} 
-  
-# form a set containing keywords of both strings  
-rvector = X_set.union(Y_set)  
-for w in rvector: 
-    if w in X_set: l1.append(1) # create a vector 
-    else: l1.append(0) 
-    if w in Y_set: l2.append(1) 
-    else: l2.append(0) 
-c = 0
-  
-# cosine formula  
-for i in range(len(rvector)): 
-        c+= l1[i]*l2[i] 
-cosine = c / float((sum(l1)*sum(l2))**0.5) 
-print("similarity: ", cosine) 
+import requests
+
+
+def divide_chunks(l, n): 
+      
+    for i in range(0, len(l), n):  
+        yield l[i:i + n] 
+
+params = (
+    ('Secret', 'KvWKLwMcbQ8PahGb'),
+)
+
+files = {
+    'File': ('sample.pdf', open('sample.pdf', 'rb')),
+    'StoreFile': (None, 'true'),
+    'OcrLanguage': (None, 'English'),
+}
+
+response = requests.post('https://v2.convertapi.com/convert/pdf/to/txt', params=params, files=files)
+
+text_url = response.json()['Files'][0]['Url']
+
+r = requests.get(text_url, allow_redirects=True)
+text = r.content.decode('utf-8')
+sentences = text.split('. ')
+x = list(divide_chunks(sentences, 50))
+
+for batch in x:
+    content = ". ".join(line for line in batch)
+
+
+
+#NB. Original query string below. It seems impossible to parse and
+#reproduce query strings 100% accurately so the one below is given
+#in case the reproduced version is not "correct".
+# response = requests.post('https://v2.convertapi.com/convert/pdf/to/txt?Secret=KvWKLwMcbQ8PahGb', files=files)
