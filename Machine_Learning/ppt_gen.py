@@ -8,7 +8,7 @@ from question_answer import qa_gen
 
 from rake_nltk import Rake
 
-r = Rake() 
+ra = Rake() 
 
 
 
@@ -46,8 +46,8 @@ def pdf_to_ppt(filename):
         pageObj = pdfReader.getPage(page)
         content = pageObj.extractText()
 
-        r.extract_keywords_from_text(content)
-        r.get_ranked_phrases()
+        ra.extract_keywords_from_text(content)
+        ra.get_ranked_phrases()
 
         page_summary = summerizer(filename[:-4], content)
 
@@ -58,7 +58,7 @@ def pdf_to_ppt(filename):
         title_shape = shapes.title
         body_shape = shapes.placeholders[1]
 
-        title_shape.text = r.get_ranked_phrases()[0]
+        title_shape.text = ra.get_ranked_phrases()[0]
 
         tf = body_shape.text_frame
         tf.text = 'Summary'
