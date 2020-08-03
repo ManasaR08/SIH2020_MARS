@@ -7,7 +7,7 @@ import requests
 from question_answer import qa_gen
 import fitz
 from rake_nltk import Rake
-
+from datetime import datetime
 ra = Rake() 
 
 
@@ -75,7 +75,11 @@ def pdf_to_ppt(filename,name):
             font.size = Pt(16)
             #p.level = 1
     
-    summary_name = 'static/summary.pptx'
+    strr = "".join(str(datetime.utcnow()).split(" "))
+    strr = strr.replace(":","")
+    strr = strr.replace(".","")
+
+    summary_name = 'static/summary'+strr+'.pptx'
     prs.save(summary_name)
     directory = os.path.dirname(__file__)
 

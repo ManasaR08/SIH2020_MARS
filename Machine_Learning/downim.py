@@ -3,15 +3,20 @@ import os
 import nltk
 from textblob import TextBlob
 from gtts import gTTS 
+from datetime import datetime
+
 def texttospeech(mytext,filename):
     language = 'en'
     myobj = gTTS(text=mytext, lang=language, slow=False)
     A=os.path.join('/home/vatsalk/Documents/SIH2020_MARS/Machine_Learning','static')
     print(A);
-    B=os.path.join(A,filename+".mp3")
+    strr = "".join(str(datetime.utcnow()).split(" "))
+    strr = strr.replace(":","")
+    strr = strr.replace(".","")
+    B=os.path.join(A,filename+strr+".mp3")
     myobj.save(B);
     #B=os.path.join(A,filename+".mp3")
-    return filename+".mp3";
+    return filename+strr+".mp3";
     #print('__file__:    ', __file__)
     #print('relative path',B)
 
