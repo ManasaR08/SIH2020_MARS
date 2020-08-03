@@ -4,7 +4,7 @@ from starlette.responses import RedirectResponse
 from ppt_gen import pdf_to_ppt
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-
+import cosine_sim;
 
 class Upload(BaseModel):
     filepath: str
@@ -38,7 +38,11 @@ async def index():
 async def search(search: Search):
     # search.types => answer or visualise
     # text => TExt to get answer to or visualise
-    return {'result':[{'text': 'Lorem ipsum dolor sit, amet consectetu elit', 'image':'assets/images/image.png', 'voice': ''},{'text': 'Lorem ipsum dolor sit, amet consectetur adipisicing elit', 'image':'assets/images/image.png', 'voice': ''}]}
+    if (search.types == 'answer'):
+        text = cosine_sim.find_answer(search.text);
+        return {'result':[{'text': text, 'voice': '', 'image':''}]}
+    else:
+        return {'result':[{'text': 'Lorem ipsum dolor sit, amet consectetu elit', 'image':'assets/images/image.png', 'voice': ''},{'text': 'Lorem ipsum dolor sit, amet consectetur adipisicing elit', 'image':'assets/images/image.png', 'voice': ''}]}
 @app.post('/pdfpptgen')
 async def pdfpptgen(upload: Upload):
     directory, name, qa_pair = pdf_to_ppt(upload.filepath)

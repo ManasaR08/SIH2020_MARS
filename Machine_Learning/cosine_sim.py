@@ -69,4 +69,4 @@ def find_answer(student_question):
 
     return answers[similarity_values.index(max(similarity_values))]
 
-answer = find_answer(student_question)
+#answer = find_answer(student_question)

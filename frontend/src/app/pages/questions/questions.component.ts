@@ -41,6 +41,9 @@ export class QuestionsComponent implements OnInit {
     }]
   }];
   uploads = [];
+  ngOnInit() {
+    
+  }
   constructor(private _store: Store<any>, private router: Router, private dialog: MatDialog, private student: StudentService, private backend: BackendService) {
     this._store.select('UserDataReducer').subscribe((val:any) => {
       console.log(val);

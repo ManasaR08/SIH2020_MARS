@@ -11,3 +11,4 @@ PyPDF2
 rake_nltk
 pymongo
 gensim
+fitz
