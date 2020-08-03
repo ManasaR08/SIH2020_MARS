@@ -7,23 +7,7 @@ import gensim
 
 import json
 
-with open('response.json') as f:
-    data = json.load(f)
 
-questions = []
-answers = []
-
-print(data.keys())
-
-for value in data.values():
-    for qa in value:
-
-        if "Question" in qa.keys():
-            questions.append(qa["Question"])
-            answers.append(qa["Answer"])
-        elif "question" in qa.keys():
-            questions.append(qa["question"])
-            answers.append(qa["answer"])
 
 def cosine_similarity(text1,text2):
     X_list = word_tokenize(text1)  
@@ -53,13 +37,34 @@ def cosine_similarity(text1,text2):
     #print("similarity: ", cosine)
     return cosine
 
+
 student_question = "This phenomenon, is probably best 59. Since then the _______, causes, and nature of the disability have been discussed by scores of investigators."
 
-similarity_values = []
-for question in questions:
-    value = cosine_similarity(student_question, question)
-    similarity_values.append(value)
-print(similarity_values)
-    
+def find_answer(student_question):
+    with open('response.json') as f:
+        data = json.load(f)
+
+    questions = []
+    answers = []
+
+    print(data.keys())
+
+    for value in data.values():
+        for qa in value:
+
+            if "Question" in qa.keys():
+                questions.append(qa["Question"])
+                answers.append(qa["Answer"])
+            elif "question" in qa.keys():
+                questions.append(qa["question"])
+                answers.append(qa["answer"])
 
 
+    similarity_values = []
+    for question in questions:
+        value = cosine_similarity(student_question, question)
+        similarity_values.append(value)
+
+    return answers[similarity_values.index(max(similarity_values))]
+
+answer = find_answer(student_question)
