@@ -5,6 +5,7 @@ from ppt_gen import pdf_to_ppt
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import cosine_sim;
+import downim;
 
 class Upload(BaseModel):
     filepath: str
@@ -42,10 +43,12 @@ async def search(search: Search):
         text = cosine_sim.find_answer(search.text);
         return {'result':[{'text': text, 'voice': '', 'image':''}]}
     else:
-        return {'result':[{'text': 'Lorem ipsum dolor sit, amet consectetu elit', 'image':'assets/images/image.png', 'voice': ''},{'text': 'Lorem ipsum dolor sit, amet consectetur adipisicing elit', 'image':'assets/images/image.png', 'voice': ''}]}
+        result = downim.main(search.text);
+        print(result);
+        return {'result':result}
 @app.post('/pdfpptgen')
 async def pdfpptgen(upload: Upload):
-    directory, name, qa_pair = pdf_to_ppt(upload.filepath)
+    directory, name, qa_pair = pdf_to_ppt(upload.filepath, upload.name)
     # response = RedirectResponse(url='/static/'+ name)
     return {"filepath": 'http://localhost:8000/'+name,
             "questions": qa_pair}

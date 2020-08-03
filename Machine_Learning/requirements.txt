@@ -12,3 +12,4 @@ rake_nltk
 pymongo
 gensim
 fitz
+google-search-results

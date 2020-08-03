@@ -63,8 +63,7 @@ export class DashboardResultComponent implements OnInit {
   }
   playAudio() {
     this.audio = new Audio();
-    // audio.src = this.result[this.current].voice
-    this.audio.src = "https://file-examples-com.github.io/uploads/2017/11/file_example_MP3_700KB.mp3";
+    this.audio.src = this.result[this.current].voice
     this.audio.load();
     this.audio.play();
   }

@@ -36,12 +36,14 @@ def divide_chunks(l, n):
 
 
 
-def pdf_to_ppt(filename):
+def pdf_to_ppt(filename,name):
 
     prs = Presentation()
     bullet_slide_layout = prs.slide_layouts[1]
+    r = requests.get(filename, allow_redirects=True)
 
-    doc = fitz.open(filename)
+    open('temp.pdf', 'wb').write(r.content)
+    doc = fitz.open('temp.pdf')
     net_content = ""
     for page in doc:
         content = page.getText()
@@ -49,7 +51,7 @@ def pdf_to_ppt(filename):
         ra.extract_keywords_from_text(content)
         ra.get_ranked_phrases()
 
-        page_summary = summerizer(filename[:-4], content)
+        page_summary = summerizer(name, content)
 
         bullet_slide_layout = prs.slide_layouts[1]
         slide = prs.slides.add_slide(bullet_slide_layout)
@@ -73,7 +75,7 @@ def pdf_to_ppt(filename):
             font.size = Pt(16)
             #p.level = 1
     
-    summary_name = 'summary.pptx'
+    summary_name = 'static/summary.pptx'
     prs.save(summary_name)
     directory = os.path.dirname(__file__)
 
