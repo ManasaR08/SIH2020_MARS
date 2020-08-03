@@ -6,6 +6,7 @@ from nltk.tokenize import word_tokenize
 import gensim
 
 import json
+import db;
 
 
 
@@ -41,23 +42,24 @@ def cosine_similarity(text1,text2):
 student_question = "This phenomenon, is probably best 59. Since then the _______, causes, and nature of the disability have been discussed by scores of investigators."
 
 def find_answer(student_question):
-    with open('response.json') as f:
-        data = json.load(f)
-
+    # with open('response.json') as f:
+    #     data = json.load(f)
+    listt = db.findAll();
     questions = []
     answers = []
 
-    print(data.keys())
+    for data in listt:
+        for value in data.keys():
+            if (value != '_id' and value != 'createdAt' and value != '__v'):
+                for qa in data[value]:
 
-    for value in data.values():
-        for qa in value:
-
-            if "Question" in qa.keys():
-                questions.append(qa["Question"])
-                answers.append(qa["Answer"])
-            elif "question" in qa.keys():
-                questions.append(qa["question"])
-                answers.append(qa["answer"])
+                    print(qa)
+                    if "Question" in qa.keys():
+                        questions.append(qa["Question"])
+                        answers.append(qa["Answer"])
+                    elif "question" in qa.keys():
+                        questions.append(qa["question"])
+                        answers.append(qa["answer"])
 
 
     similarity_values = []
