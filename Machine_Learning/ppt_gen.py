@@ -5,7 +5,7 @@ from pptx.util import Inches, Pt
 import os
 import requests
 from question_answer import qa_gen
-
+import fitz
 from rake_nltk import Rake
 
 r = Rake() 
@@ -29,6 +29,11 @@ def summerizer(title, content):
 
     return response['sentences']
 
+def divide_chunks(l, n): 
+      
+    for i in range(0, len(l), n):  
+        yield l[i:i + n] 
+
 
 
 def pdf_to_ppt(filename):
@@ -36,16 +41,11 @@ def pdf_to_ppt(filename):
     prs = Presentation()
     bullet_slide_layout = prs.slide_layouts[1]
 
-    r = requests.get(filename, allow_redirects=True)
-    open('temp.pdf', 'wb').write(r.content)
-    pdfFileObj = open('temp.pdf', 'rb')
-    pdfReader = PyPDF2.PdfFileReader(pdfFileObj)
-    print("There are {} pages in the document".format(pdfReader.numPages))
-
-    for page in range(pdfReader.numPages):
-        pageObj = pdfReader.getPage(page)
-        content = pageObj.extractText()
-
+    doc = fitz.open(filename)
+    net_content = ""
+    for page in doc:
+        content = page.getText()
+        net_content = net_content + content
         r.extract_keywords_from_text(content)
         r.get_ranked_phrases()
 
@@ -73,10 +73,14 @@ def pdf_to_ppt(filename):
             font.size = Pt(16)
             #p.level = 1
     
-    summary_name = 'static/summary.pptx'
+    summary_name = 'summary.pptx'
     prs.save(summary_name)
     directory = os.path.dirname(__file__)
 
-    qa_pair = qa_gen('temp.pdf')
+    qa_pair = qa_gen(net_content)
 
     return directory, summary_name, qa_pair
+
+#d, f, qa = pdf_to_ppt('sample.pdf')
+    
+#print(qa)
