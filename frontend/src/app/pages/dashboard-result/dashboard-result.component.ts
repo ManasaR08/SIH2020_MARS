@@ -19,6 +19,7 @@ export class DashboardResultComponent implements OnInit {
   result = [];
   search: string;
   current: number;
+  audio: any;
   constructor(private _store: Store<any>, private router: Router, private dialog: MatDialog, private student: StudentService, private backend: BackendService) {
     this._store.select('UserDataReducer').subscribe((val:any) => {
       console.log(val);
@@ -59,6 +60,17 @@ export class DashboardResultComponent implements OnInit {
   prev() {
     if (this.current == 0) return;
     this.current -= 1;
+  }
+  playAudio() {
+    this.audio = new Audio();
+    // audio.src = this.result[this.current].voice
+    this.audio.src = "https://file-examples-com.github.io/uploads/2017/11/file_example_MP3_700KB.mp3";
+    this.audio.load();
+    this.audio.play();
+  }
+
+  stopAudio() {
+    this.audio.pause();
   }
 
   visualise(text) {
